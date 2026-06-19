@@ -1,11 +1,5 @@
 # Financial Intelligence Platform - Team 46
 
-Live Demo: [https://team46.in](https://team46.in)
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-> Complete financial intelligence platform with real-time news processing, bond forecasting, forex trading analysis, and interactive dashboard.
-
 ## 🎯 Features
 
 ### News Intelligence
@@ -808,5 +802,3 @@ docker-compose up -d --scale llm-worker=3
 ```
 
 ---
-
-Built with ❤️ for financial intelligence automation
