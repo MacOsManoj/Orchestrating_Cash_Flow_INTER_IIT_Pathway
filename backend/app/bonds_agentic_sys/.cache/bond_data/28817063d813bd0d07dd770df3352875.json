@@ -1,0 +1,20 @@
+{
+  "timestamp": "2025-12-07T01:47:53.014748",
+  "isin": "IN0020110055",
+  "days_ahead": 21,
+  "cache_type": "bond_price",
+  "data": {
+    "bond_symbol": "897GS2030",
+    "bond_isin": "IN0020110055",
+    "bond_name": "GOVERNMENT OF INDIA 11007 GOI 05DC30",
+    "day": 21,
+    "date": "2026-01-01",
+    "estimated_price": 112.77,
+    "ytm_percent": 6.234,
+    "maturity_date": "2030-12-05",
+    "coupon_rate": 8.97,
+    "bond_type": "Government",
+    "rating": "AAA",
+    "risk_level": "Low"
+  }
+}

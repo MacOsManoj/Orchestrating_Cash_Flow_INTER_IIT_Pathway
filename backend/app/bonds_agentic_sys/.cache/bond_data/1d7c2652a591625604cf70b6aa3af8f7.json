@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-12-07T03:02:16.700538",
+  "isin": "IN0020230085",
+  "cache_type": "bond_details",
+  "data": {
+    "isin": "IN0020230085",
+    "symbol": "718GS2033",
+    "name": "GOVERNMENT OF INDIA 33298 GOI 14AG33",
+    "face_value": 100.0,
+    "coupon_rate": 7.18,
+    "coupon_frequency": 2,
+    "maturity_date": "2033-08-14",
+    "years_to_maturity": 7.68,
+    "last_traded_price": 105.4,
+    "theoretical_price": 107.26,
+    "current_price": 105.4,
+    "ytm": 6.514,
+    "valuation_date": "2025-12-04",
+    "macaulay_duration": 5.963,
+    "modified_duration": 5.599,
+    "convexity": 42.148
+  }
+}

@@ -1,0 +1,210 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "fx.schema.json",
+  "title": "Foreign Exchange (FX) Asset Schema",
+  "description": "JSON Schema for currency trading and forex analysis data validation",
+  "type": "object",
+  "definitions": {
+    "CurrencyPair": {
+      "type": "object",
+      "properties": {
+        "baseCurrency": { "type": "string" },
+        "quoteCurrency": { "type": "string" },
+        "symbol": { "type": "string" },
+        "displayName": { "type": "string" },
+        "category": {
+          "type": "string",
+          "enum": ["Major", "Minor", "Exotic"]
+        }
+      },
+      "required": ["baseCurrency", "quoteCurrency", "symbol", "displayName", "category"]
+    },
+    "FXPrice": {
+      "type": "object",
+      "properties": {
+        "spotRate": { "type": "number" },
+        "bid": { "type": "number" },
+        "ask": { "type": "number" },
+        "bidAskSpread": { "type": "number" },
+        "change": { "type": "number" },
+        "changePercent": { "type": "number" },
+        "lastUpdate": { "type": "string" }
+      },
+      "required": ["spotRate", "bid", "ask", "change", "changePercent"]
+    },
+    "ForwardPoints": {
+      "type": "object",
+      "properties": {
+        "oneMonthForward": { "type": "number" },
+        "threeMonthForward": { "type": "number" },
+        "sixMonthForward": { "type": "number" },
+        "oneYearForward": { "type": "number" },
+        "swapPoints": { "type": "number" }
+      },
+      "required": ["oneMonthForward", "threeMonthForward", "sixMonthForward", "oneYearForward"]
+    },
+    "FXPosition": {
+      "type": "object",
+      "properties": {
+        "notionalValue": { "type": "number" },
+        "investedAmount": { "type": "number" },
+        "gainLoss": { "type": "number" },
+        "gainLossPercent": { "type": "number" },
+        "unrealizedPnL": { "type": "number" },
+        "realizedPnL": { "type": "number" },
+        "quantity": { "type": "number" },
+        "avgEntryRate": { "type": "number" }
+      },
+      "required": ["notionalValue", "gainLoss", "gainLossPercent"]
+    },
+    "InterestRateDifferential": {
+      "type": "object",
+      "properties": {
+        "baseCurrencyRate": { "type": "number" },
+        "quoteCurrencyRate": { "type": "number" },
+        "differential": { "type": "number" },
+        "effectiveYield": { "type": "number" }
+      },
+      "required": ["baseCurrencyRate", "quoteCurrencyRate", "differential"]
+    },
+    "FXChartData": {
+      "type": "object",
+      "properties": {
+        "time": { "type": "string" },
+        "spotRate": { "type": "number" },
+        "forwardPoints": { "type": "number" },
+        "highRate": { "type": "number" },
+        "lowRate": { "type": "number" }
+      },
+      "required": ["time", "spotRate", "forwardPoints"]
+    },
+    "FXTechnicalData": {
+      "type": "object",
+      "properties": {
+        "rsi": { "type": "number" },
+        "macd": { "type": "string" },
+        "movingAverage20": { "type": "number" },
+        "movingAverage50": { "type": "number" },
+        "movingAverage200": { "type": "number" },
+        "support": { "type": "number" },
+        "resistance": { "type": "number" },
+        "trend": {
+          "type": "string",
+          "enum": ["Bullish", "Bearish", "Sideways"]
+        }
+      },
+      "required": ["rsi", "support", "resistance", "trend"]
+    },
+    "MarketEvent": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["Bullish", "Bearish", "Alert", "Update"]
+        },
+        "title": { "type": "string" },
+        "source": { "type": "string" },
+        "time": { "type": "string" },
+        "notional": { "type": ["number", "null"] },
+        "rate": { "type": ["number", "null"] },
+        "impact": {
+          "type": "string",
+          "enum": ["High", "Medium", "Low"]
+        },
+        "relatedEconomicIndicator": { "type": "string" }
+      },
+      "required": ["type", "title", "source", "time"]
+    },
+    "EconomicIndicator": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "value": { "type": "number" },
+        "forecast": { "type": "number" },
+        "previous": { "type": "number" },
+        "releaseDate": { "type": "string" },
+        "country": { "type": "string" },
+        "impact": {
+          "type": "string",
+          "enum": ["High", "Medium", "Low"]
+        },
+        "currency": { "type": "string" }
+      },
+      "required": ["name", "value", "forecast", "previous", "releaseDate", "country", "impact", "currency"]
+    },
+    "CentralBankPolicy": {
+      "type": "object",
+      "properties": {
+        "country": { "type": "string" },
+        "interestRate": { "type": "number" },
+        "trend": {
+          "type": "string",
+          "enum": ["Hiking", "Cutting", "Neutral"]
+        },
+        "lastUpdated": { "type": "string" },
+        "nextMeetingDate": { "type": "string" }
+      },
+      "required": ["country", "interestRate", "trend", "lastUpdated"]
+    },
+    "FXVolatility": {
+      "type": "object",
+      "properties": {
+        "currentIV": { "type": "number" },
+        "historical20Day": { "type": "number" },
+        "historical60Day": { "type": "number" },
+        "trend": {
+          "type": "string",
+          "enum": ["Increasing", "Decreasing", "Stable"]
+        }
+      },
+      "required": ["currentIV", "historical20Day", "historical60Day", "trend"]
+    },
+    "Sentiment": {
+      "type": "object",
+      "properties": {
+        "bullishPercent": { "type": "number" },
+        "bearishPercent": { "type": "number" },
+        "neutralPercent": { "type": "number" }
+      },
+      "required": ["bullishPercent", "bearishPercent", "neutralPercent"]
+    }
+  },
+  "properties": {
+    "currencyPair": { "$ref": "#/definitions/CurrencyPair" },
+    "pricing": { "$ref": "#/definitions/FXPrice" },
+    "forwardPoints": { "$ref": "#/definitions/ForwardPoints" },
+    "position": { "$ref": "#/definitions/FXPosition" },
+    "interestRateDifferential": { "$ref": "#/definitions/InterestRateDifferential" },
+    "chartData": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": { "$ref": "#/definitions/FXChartData" }
+      }
+    },
+    "technicalAnalysis": { "$ref": "#/definitions/FXTechnicalData" },
+    "events": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/MarketEvent" }
+    },
+    "marketEvents": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/MarketEvent" }
+    },
+    "economicIndicators": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/EconomicIndicator" }
+    },
+    "centralBankPolicies": {
+      "type": "object",
+      "properties": {
+        "baseCurrency": { "$ref": "#/definitions/CentralBankPolicy" },
+        "quoteCurrency": { "$ref": "#/definitions/CentralBankPolicy" }
+      },
+      "required": ["baseCurrency", "quoteCurrency"]
+    },
+    "volatility": { "$ref": "#/definitions/FXVolatility" },
+    "sentiment": { "$ref": "#/definitions/Sentiment" }
+  },
+  "required": ["currencyPair", "pricing"]
+}

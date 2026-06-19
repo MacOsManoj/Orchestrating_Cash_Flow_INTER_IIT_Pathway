@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-12-07T03:02:14.381026",
+  "isin": "IN0020160100",
+  "cache_type": "bond_details",
+  "data": {
+    "isin": "IN0020160100",
+    "symbol": "657GS2033",
+    "name": "GOVERNMENT OF INDIA 18957 GOI 05DC33",
+    "face_value": 100.0,
+    "coupon_rate": 6.57,
+    "coupon_frequency": 2,
+    "maturity_date": "2033-12-05",
+    "years_to_maturity": 7.99,
+    "last_traded_price": 98.9,
+    "theoretical_price": 104.65,
+    "current_price": 98.9,
+    "ytm": 6.521,
+    "valuation_date": "2025-12-04",
+    "macaulay_duration": 6.159,
+    "modified_duration": 5.782,
+    "convexity": 45.17
+  }
+}

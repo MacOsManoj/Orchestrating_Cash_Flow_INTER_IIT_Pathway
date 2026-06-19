@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-12-07T01:47:52.337519",
+  "isin": "IN0020230135",
+  "cache_type": "bond_details",
+  "data": {
+    "isin": "IN0020230135",
+    "symbol": "732GS2030",
+    "name": "GOVERNMENT OF INDIA 33618 GOI 13NV30",
+    "face_value": 100.0,
+    "coupon_rate": 7.32,
+    "coupon_frequency": 2,
+    "maturity_date": "2030-11-13",
+    "years_to_maturity": 4.93,
+    "last_traded_price": 104.58,
+    "theoretical_price": 105.66,
+    "current_price": 104.58,
+    "ytm": 6.213,
+    "valuation_date": "2025-12-04",
+    "macaulay_duration": 4.238,
+    "modified_duration": 3.99,
+    "convexity": 21.262
+  }
+}

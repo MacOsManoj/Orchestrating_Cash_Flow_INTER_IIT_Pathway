@@ -1,0 +1,20 @@
+{
+  "timestamp": "2025-12-07T03:02:16.939380",
+  "isin": "IN0020230085",
+  "days_ahead": 21,
+  "cache_type": "bond_price",
+  "data": {
+    "bond_symbol": "718GS2033",
+    "bond_isin": "IN0020230085",
+    "bond_name": "GOVERNMENT OF INDIA 33298 GOI 14AG33",
+    "day": 21,
+    "date": "2026-01-01",
+    "estimated_price": 107.02,
+    "ytm_percent": 6.663,
+    "maturity_date": "2033-08-14",
+    "coupon_rate": 7.18,
+    "bond_type": "Government",
+    "rating": "AAA",
+    "risk_level": "Low"
+  }
+}

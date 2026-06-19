@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-12-07T01:47:52.801405",
+  "isin": "IN0020110055",
+  "cache_type": "bond_details",
+  "data": {
+    "isin": "IN0020110055",
+    "symbol": "897GS2030",
+    "name": "GOVERNMENT OF INDIA 11007 GOI 05DC30",
+    "face_value": 100.0,
+    "coupon_rate": 8.97,
+    "coupon_frequency": 2,
+    "maturity_date": "2030-12-05",
+    "years_to_maturity": 4.99,
+    "last_traded_price": 111.8,
+    "theoretical_price": 116.78,
+    "current_price": 111.8,
+    "ytm": 6.22,
+    "valuation_date": "2025-12-04",
+    "macaulay_duration": 4.033,
+    "modified_duration": 3.797,
+    "convexity": 20.24
+  }
+}

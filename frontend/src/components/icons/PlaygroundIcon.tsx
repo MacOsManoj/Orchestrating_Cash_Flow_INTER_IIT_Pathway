@@ -1,0 +1,23 @@
+interface IconProps {
+  className?: string;
+  size?: number;
+}
+
+export const PlaygroundIcon = ({ className, size = 24 }: IconProps) => {
+  return (
+    <svg 
+      width={size} 
+      height={size} 
+      viewBox="0 0 51 38" 
+      fill="none" 
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+    >
+      <rect x="1.5" y="1.5" width="47.4" height="35" rx="4.5" stroke="currentColor" strokeWidth="3"/>
+      <path d="M25.5 0L25.5 38" stroke="currentColor" strokeWidth="3"/>
+      <path d="M25.083 11.5C28.6485 11.5 31.666 14.562 31.666 18.5C31.666 22.438 28.6485 25.5 25.083 25.5C21.5175 25.5 18.5 22.438 18.5 18.5C18.5 14.562 21.5175 11.5 25.083 11.5Z" stroke="currentColor" strokeWidth="3"/>
+      <path d="M43.366 9.5H46.9735C48.0781 9.5 48.9735 10.3954 48.9735 11.5V26.5C48.9735 27.6046 48.0781 28.5 46.9735 28.5H43.366C42.2614 28.5 41.366 27.6046 41.366 26.5V11.5C41.366 10.3954 42.2614 9.5 43.366 9.5Z" stroke="currentColor" strokeWidth="3"/>
+      <path d="M3.90186 10H7.50939C8.61396 10 9.50939 10.8954 9.50939 12V27C9.50939 28.1046 8.61396 29 7.50939 29H3.90186C2.79729 29 1.90186 28.1046 1.90186 27V12C1.90186 10.8954 2.79729 10 3.90186 10Z" stroke="currentColor" strokeWidth="3"/>
+    </svg>
+  );
+};

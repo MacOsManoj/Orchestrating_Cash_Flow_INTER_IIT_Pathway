@@ -1,0 +1,84 @@
+# Forex Agent MCP Server Configuration
+# =====================================
+# YAML configuration for Pathway MCP Server
+
+# Server settings
+server:
+  name: "Forex Agent MCP Server"
+  transport: "streamable-http"
+  host: "localhost"
+  port: 8123
+
+# Forex pairs to monitor
+forex_pairs:
+  - EURINR
+  - GBPINR
+  - JPYINR
+  - EURUSD
+  - GBPUSD
+  - USDJPY
+
+# Data directories
+paths:
+  data_dir: "./data"
+  positions_file: "./positions.json"
+  trades_file: "./trades.json"
+
+# API Keys (set via environment variables)
+# export PATHWAY_LICENSE_KEY="your_key"
+# export NEWSDATA_API_KEY="your_key"
+
+# Tool descriptions for MCP clients
+tools:
+  get_forex_overview:
+    description: "Get a quick overview of all forex pairs including current prices, positions, and profit metrics"
+    parameters: []
+    
+  get_trades_summary:
+    description: "Get trading performance summary including profit, max drawdown, win rate, Sharpe ratio"
+    parameters:
+      - name: pairs
+        type: string
+        description: "Comma-separated forex pairs (e.g., 'EURUSD,GBPUSD'). Leave empty for all pairs."
+        required: false
+        
+  get_position_details:
+    description: "Get current position details including entry price, unrealized P&L, stop loss, take profit"
+    parameters:
+      - name: pairs
+        type: string
+        description: "Comma-separated forex pairs. Leave empty for all pairs."
+        required: false
+        
+  get_currency_regime:
+    description: "Analyze market regime (trending/mean-reverting) using Hurst exponent analysis"
+    parameters:
+      - name: pairs
+        type: string
+        description: "Comma-separated forex pairs. Leave empty for all pairs."
+        required: false
+        
+  get_currency_correlation:
+    description: "Calculate correlation matrix between forex pairs for portfolio risk analysis"
+    parameters:
+      - name: pairs
+        type: string
+        description: "Comma-separated forex pairs (minimum 2). Leave empty for all pairs."
+        required: false
+        
+  get_news_sentiment:
+    description: "Get news sentiment analysis for forex pairs. Requires NEWSDATA_API_KEY."
+    parameters:
+      - name: pairs
+        type: string
+        description: "Comma-separated forex pairs. Leave empty for all pairs."
+        required: false
+        
+  get_live_indicators:
+    description: "Get real-time technical indicators (RSI, MACD, SMA, EMA, ATR, volatility)"
+    parameters:
+      - name: pairs
+        type: string
+        description: "Comma-separated forex pairs. Leave empty for all pairs."
+        required: false
+

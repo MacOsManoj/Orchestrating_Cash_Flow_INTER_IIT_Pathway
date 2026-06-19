@@ -1,0 +1,5 @@
+1. Download the entire pathway_producer_consumer file as it is.
+2. Ensure you have all dependencies installed in your venv.
+3. First run the pathway_producer_new.py,with .env file in the same place as it is mentioned here. In mac, there might be errors, it is upto you to figure out the relative paths etc. DONOT CHANGE ANYTHING ELSE IN THE CODE
+4. Then run python3 nse_gsec_script.py --scheduler in another terminal tab.
+5. Once you have the folder output_forecasts, with the final_forecast file populated, you can run the bond_server.py

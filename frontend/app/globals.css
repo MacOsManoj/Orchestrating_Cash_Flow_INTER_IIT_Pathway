@@ -1,0 +1,158 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Updated root colors to use dark teal (#0F2424) as base */
+  --background: 15 36 36; /* #0F2424 in RGB */
+  --foreground: 255 255 255; /* White */
+  --card: 20 42 42; /* Slightly lighter than background */
+  --card-foreground: 255 255 255;
+  --border: 30 55 55; /* Subtle border */
+
+  /* Chart colors from Figma */
+  --chart-magenta: 236 72 153; /* #ec4899 */
+  --chart-purple: 168 85 247; /* #a855f7 */
+  --chart-teal: 20 184 166; /* #14b8a6 */
+  --chart-blue: 59 130 246; /* #3b82f6 */
+
+  /* Badge colors */
+  --badge-teal: 20 184 166;
+  --badge-purple: 168 85 247;
+  --badge-orange: 251 146 60;
+  --badge-magenta: 236 72 153;
+  --badge-cyan: 34 211 238;
+
+  /* Status colors */
+  --success: 34 197 94; /* Green for positive */
+  --danger: 239 68 68; /* Red for negative */
+
+  --radius: 0.5rem;
+}
+
+.dark {
+  /* Ensure dark mode uses same color scheme */
+  --background: 15 36 36;
+  --foreground: 255 255 255;
+  --card: 20 42 42;
+  --card-foreground: 255 255 255;
+  --border: 30 55 55;
+}
+
+@theme inline {
+  /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
+  --color-background: rgb(var(--background));
+  --color-foreground: rgb(var(--foreground));
+  --color-card: rgb(var(--card));
+  --color-card-foreground: rgb(var(--card-foreground));
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: rgb(var(--border));
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Chart colors */
+  --color-chart-magenta: rgb(var(--chart-magenta));
+  --color-chart-purple: rgb(var(--chart-purple));
+  --color-chart-teal: rgb(var(--chart-teal));
+  --color-chart-blue: rgb(var(--chart-blue));
+
+  /* Badge colors */
+  --color-badge-teal: rgb(var(--badge-teal));
+  --color-badge-purple: rgb(var(--badge-purple));
+  --color-badge-orange: rgb(var(--badge-orange));
+  --color-badge-magenta: rgb(var(--badge-magenta));
+  --color-badge-cyan: rgb(var(--badge-cyan));
+
+  /* Status colors */
+  --color-success: rgb(var(--success));
+  --color-danger: rgb(var(--danger));
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    /* Fixed syntax - explicitly set background to #0F2424 and text to white */
+    background-color: #0f2424;
+    color: white;
+    font-feature-settings: "tnum";
+  }
+}
+
+@layer utilities {
+  .bg-accent-teal {
+    background-color: #14b8a6;
+  }
+  .bg-accent-purple {
+    background-color: #a855f7;
+  }
+  .bg-accent-orange {
+    background-color: #fb923c;
+  }
+  .bg-accent-magenta {
+    background-color: #ec4899;
+  }
+  .bg-accent-blue {
+    background-color: #3b82f6;
+  }
+  .bg-accent-green {
+    background-color: #22c55e;
+  }
+  .bg-accent-red {
+    background-color: #ef4444;
+  }
+  .text-accent-teal {
+    color: #14b8a6;
+  }
+  .text-accent-purple {
+    color: #a855f7;
+  }
+  .text-accent-orange {
+    color: #fb923c;
+  }
+  .text-accent-magenta {
+    color: #ec4899;
+  }
+  .text-accent-blue {
+    color: #3b82f6;
+  }
+  .text-accent-green {
+    color: #22c55e;
+  }
+  .text-accent-red {
+    color: #ef4444;
+  }
+  .bg-card-hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-12-07T01:47:51.256893",
+  "isin": "IN0020130053",
+  "cache_type": "bond_details",
+  "data": {
+    "isin": "IN0020130053",
+    "symbol": "92GS2030",
+    "name": "GOVERNMENT OF INDIA 16467 GOI 30SP30",
+    "face_value": 100.0,
+    "coupon_rate": 9.2,
+    "coupon_frequency": 2,
+    "maturity_date": "2030-09-30",
+    "years_to_maturity": 4.81,
+    "last_traded_price": 114.65,
+    "theoretical_price": 114.61,
+    "current_price": 114.65,
+    "ytm": 6.197,
+    "valuation_date": "2025-12-04",
+    "macaulay_duration": 4.0,
+    "modified_duration": 3.766,
+    "convexity": 19.495
+  }
+}

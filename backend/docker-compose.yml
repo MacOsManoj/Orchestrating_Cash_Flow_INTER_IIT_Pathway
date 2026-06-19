@@ -1,0 +1,249 @@
+version: '3.8'
+
+# ===========================
+# Backend Services Docker Compose
+# ===========================
+# This compose file handles:
+# - Bonds: Pipeline → MCP Server
+# - Forex: MCP Server  
+# - FastAPI Backend: REST API
+# - MongoDB: Local (optional, or use external)
+# ===========================
+# For full platform (news pipeline, kafka, etc.), use root docker-compose.yml
+# ===========================
+
+services:
+  # ==========================================
+  # BONDS SERVICES
+  # ==========================================
+  
+  # Step 1: Bond Pipeline (runs 4 background services)
+  # Starts: scraper, nse_gsec, pathway_producer, bond_server_manager
+  bond-pipeline:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bond-pipeline
+    env_file:
+      - ./.env
+    environment:
+      - PYTHONPATH=/app:/app/app/bonds_agentic_sys:/app/app/forex
+      - PATH=/app/.venv/bin:$PATH
+      - STARTUP_DELAY=${BOND_STARTUP_DELAY:-30}
+    working_dir: /app/app/bonds_agentic_sys/pathway_producer_consumer
+    command: >
+      bash -c "
+        chmod +x run_bond_pipeline_linux.sh &&
+        ./run_bond_pipeline_linux.sh start &&
+        echo '✅ Bond pipeline services started (scraper, nse_gsec, pathway_producer, bond_server_manager)' &&
+        echo '📊 Monitoring pipeline...' &&
+        tail -f /dev/null
+      "
+    volumes:
+      - bonds_cache:/app/app/bonds_agentic_sys/.cache
+      - bonds_forecasts:/app/app/bonds_agentic_sys/output_forecasts
+      - pipeline_logs:/app/app/bonds_agentic_sys/pathway_producer_consumer/logs
+      - pipeline_pids:/app/app/bonds_agentic_sys/pathway_producer_consumer/.pids
+    networks:
+      - backend_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "test -f /app/app/bonds_agentic_sys/pathway_producer_consumer/.pids/bond_server_manager.pid && kill -0 $$(cat /app/app/bonds_agentic_sys/pathway_producer_consumer/.pids/bond_server_manager.pid) 2>/dev/null || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 90s
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+        reservations:
+          memory: 1G
+
+  # Step 2: Bond MCP Server (starts after pipeline generates forecasts)
+  bond-mcp-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bond-mcp-server
+    depends_on:
+      bond-pipeline:
+        condition: service_healthy
+    env_file:
+      - ./.env
+    environment:
+      - PYTHONPATH=/app:/app/app/bonds_agentic_sys:/app/app/forex
+      - PATH=/app/.venv/bin:$PATH
+      - MCP_HOST=0.0.0.0
+      - MCP_PORT=8123
+    working_dir: /app/app/bonds_agentic_sys/tools
+    command: >
+      bash -c "
+        echo '⏳ Waiting for bond pipeline to generate forecasts...' &&
+        timeout 300 bash -c 'until [ -f /app/app/bonds_agentic_sys/output_forecasts/final_forecasts.csv ]; do 
+          echo \"   Waiting for final_forecasts.csv...\";
+          sleep 5;
+        done' &&
+        echo '✅ Forecasts ready. Starting Bond MCP Server on port 8123...' &&
+        python bond_server.py
+      "
+    volumes:
+      - bonds_cache:/app/app/bonds_agentic_sys/.cache
+      - bonds_forecasts:/app/app/bonds_agentic_sys/output_forecasts
+    ports:
+      - "8123:8123"
+    networks:
+      - backend_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "python -c 'import requests; requests.get(\"http://localhost:8123\", timeout=5)' || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 512M
+
+  # ==========================================
+  # FOREX SERVICES
+  # ==========================================
+  
+  # Forex MCP Server
+  forex-mcp-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: forex-mcp-server
+    env_file:
+      - ./.env
+    environment:
+      - PYTHONPATH=/app:/app/app/bonds_agentic_sys:/app/app/forex
+      - PATH=/app/.venv/bin:$PATH
+      - PATHWAY_LICENSE_KEY=${PATHWAY_LICENSE_KEY}
+      - NEWSDATA_API_KEY=${NEWSDATA_API_KEY:-}
+      - MCP_HOST=0.0.0.0
+      - MCP_PORT=8127
+    working_dir: /app/app/forex
+    command: >
+      bash -c "
+        echo '🚀 Starting Forex MCP Server on port 8127...' &&
+        python mcp_server.py
+      "
+    volumes:
+      - forex_data:/app/app/forex/data
+      - forex_positions:/app/app/forex
+    ports:
+      - "8127:8127"
+    networks:
+      - backend_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "python -c 'import requests; requests.get(\"http://localhost:8127/mcp/\", timeout=5)' || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 512M
+
+  # ==========================================
+  # API LAYER
+  # ==========================================
+  
+  # FastAPI Backend - REST API
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: api
+    depends_on:
+      bond-mcp-server:
+        condition: service_healthy
+      forex-mcp-server:
+        condition: service_healthy
+    env_file:
+      - ./.env
+    environment:
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      - CORS_ORIGINS=http://localhost:5173,http://localhost:3000
+      - PYTHONPATH=/app:/app/app/bonds_agentic_sys:/app/app/forex
+      - PATH=/app/.venv/bin:$PATH
+      # MCP Server URLs (internal Docker network)
+      - BOND_MCP_URL=http://bond-mcp-server:8123
+      - FOREX_MCP_URL=http://forex-mcp-server:8127
+    volumes:
+      - ./:/app
+      - bonds_cache:/app/app/bonds_agentic_sys/.cache
+      - bonds_forecasts:/app/app/bonds_agentic_sys/output_forecasts
+    ports:
+      - "8000:8000"
+    networks:
+      - backend_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 512M
+
+  # ==========================================
+  # MONGODB (Optional - Use external if preferred)
+  # ==========================================
+  
+  mongodb:
+    image: mongo:7.0
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - backend_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    profiles:
+      - mongodb  # Only start with: docker-compose --profile mongodb up
+
+# ==========================================
+# NETWORKS
+# ==========================================
+
+networks:
+  backend_network:
+    driver: bridge
+  # Connect to root docker-compose network if needed
+  intelligence_network:
+    external: true
+
+# ==========================================
+# VOLUMES (Persistent Storage)
+# ==========================================
+
+volumes:
+  mongodb_data:
+  bonds_cache:
+  bonds_forecasts:
+  pipeline_logs:
+  pipeline_pids:
+  forex_data:
+  forex_positions:

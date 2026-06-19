@@ -1,0 +1,20 @@
+{
+  "timestamp": "2025-12-07T01:47:52.110646",
+  "isin": "IN0020220037",
+  "days_ahead": 21,
+  "cache_type": "bond_price",
+  "data": {
+    "bond_symbol": "738GS2027",
+    "bond_isin": "IN0020220037",
+    "bond_name": "GOVERNMENT OF INDIA 31719 GOI 20JU27",
+    "day": 21,
+    "date": "2026-01-01",
+    "estimated_price": 102.69,
+    "ytm_percent": 5.707,
+    "maturity_date": "2027-06-20",
+    "coupon_rate": 7.38,
+    "bond_type": "Government",
+    "rating": "AAA",
+    "risk_level": "Low"
+  }
+}

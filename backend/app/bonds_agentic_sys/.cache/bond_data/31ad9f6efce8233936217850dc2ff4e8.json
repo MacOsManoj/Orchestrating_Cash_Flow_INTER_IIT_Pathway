@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-12-07T01:47:50.768079",
+  "isin": "IN2420230053",
+  "cache_type": "bond_details",
+  "data": {
+    "isin": "IN2420230053",
+    "symbol": "766ML32",
+    "name": "STATE DEVELOPMENT LOAN 33652 MEG 22NV32",
+    "face_value": 100.0,
+    "coupon_rate": 7.66,
+    "coupon_frequency": 2,
+    "maturity_date": "2032-11-22",
+    "years_to_maturity": 6.96,
+    "last_traded_price": 99.28,
+    "theoretical_price": 107.8,
+    "current_price": 99.28,
+    "ytm": 6.484,
+    "valuation_date": "2025-12-04",
+    "macaulay_duration": 5.569,
+    "modified_duration": 5.23,
+    "convexity": 36.284
+  }
+}

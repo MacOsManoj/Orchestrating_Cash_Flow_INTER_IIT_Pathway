@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-12-07T03:36:03.687733",
+  "isin": "IN0020200294",
+  "cache_type": "bond_details",
+  "data": {
+    "isin": "IN0020200294",
+    "symbol": "585GS2030",
+    "name": "GOVERNMENT OF INDIA 29753 GOI 01DC30",
+    "face_value": 100.0,
+    "coupon_rate": 5.85,
+    "coupon_frequency": 2,
+    "maturity_date": "2030-12-01",
+    "years_to_maturity": 4.98,
+    "last_traded_price": 98.2,
+    "theoretical_price": 99.03,
+    "current_price": 98.2,
+    "ytm": 6.219,
+    "valuation_date": "2025-12-04",
+    "macaulay_duration": 4.394,
+    "modified_duration": 4.136,
+    "convexity": 22.402
+  }
+}

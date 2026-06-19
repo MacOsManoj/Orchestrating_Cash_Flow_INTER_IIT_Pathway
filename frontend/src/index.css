@@ -1,0 +1,442 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --radius: 0.625rem;
+  --background: #0B141A;
+  --foreground: oklch(0.145 0 0);
+  --card: rgba(51, 65, 85, 0.3);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: #8DCECE;
+  --primary-foreground: #0B141A;
+  --secondary: rgba(51, 65, 85, 0.3);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: rgba(51, 65, 85, 0.3);
+  --muted-foreground: #8DCECE;
+  --accent: #8DCECE;
+  --accent-foreground: #0B141A;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: #8DCECE;
+  --input: #8DCECE;
+  --ring: #8DCECE;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: #0B141A;
+  --foreground: #FFFFFF;
+  --card: rgba(51, 65, 85, 0.3);
+  --card-foreground: #FFFFFF;
+  --popover: rgba(51, 65, 85, 0.3);
+  --popover-foreground: #FFFFFF;
+  --primary: #8DCECE;
+  --primary-foreground: #0B141A;
+  --secondary: rgba(51, 65, 85, 0.3);
+  --secondary-foreground: #FFFFFF;
+  --muted: rgba(51, 65, 85, 0.3);
+  --muted-foreground: #8DCECE;
+  --accent: #8DCECE;
+  --accent-foreground: #0B141A;
+  --success: #00B894;
+  --success-bg: rgba(0, 184, 148, 0.2);
+  --destructive: #D63031;
+  --destructive-bg: rgba(214, 48, 49, 0.2);
+  --destructive-foreground: #FFFFFF;
+  --medium-risk: #F1C40F;
+  --border: #8DCECE;
+  --input: #8DCECE;
+  --ring: #8DCECE;
+  --chart-1: #8DCECE;
+  --chart-2: #00B894;
+  --chart-3: #D63031;
+  --chart-4: #F1C40F;
+  --chart-5: rgba(51, 65, 85, 0.3);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  /* Enable page-level scrolling - CRITICAL FIX */
+  html {
+    height: 100%;
+    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+  }
+
+  body {
+    min-height: 100vh;
+    height: auto; /* Allow body to grow with content */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    @apply bg-background text-foreground;
+  }
+
+  #root {
+    min-height: 100vh;
+    height: auto; /* Allow root to grow with content */
+  }
+}
+
+/* FlexLayout Customization */
+.flexlayout__layout {
+  background-color: var(--background) !important;
+  --color-text: var(--accent);
+  --color-background: var(--background);
+  --color-base: var(--card);
+  --color-1: var(--card);
+  --color-2: var(--card);
+  --color-3: var(--accent);
+  --color-4: var(--accent);
+  --color-5: var(--destructive);
+  --color-6: var(--background);
+  --color-splitter: rgba(141, 206, 206, 0.5);
+  --color-splitter-hover: #8DCECE;
+  --color-splitter-drag: #8DCECE;
+}
+
+/* Full-width bottom border for the header area */
+.flexlayout__layout::after {
+  content: '';
+  position: absolute;
+  top: 56px; /* Aligned to exact bottom of tabs */
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #8DCECE;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* ===== FlexLayout Tab Styling - Clean Modern Look ===== */
+
+.flexlayout__tabset {
+  background-color: var(--background) !important;
+  background-image: none !important;
+  overflow: visible !important;
+  box-shadow: none !important;
+  position: relative !important;
+}
+
+/* Header container */
+.flexlayout__tabset_header {
+  border-bottom: none !important; /* Border handled by .flexlayout__layout::after */
+  position: relative !important;
+  z-index: 1 !important;
+  width: 100% !important;
+  overflow: visible !important;
+}
+
+.flexlayout__tabset_tabbar_inner {
+  width: auto !important;
+  max-width: 100% !important;
+  overflow: visible !important;
+  scrollbar-width: none; /* Firefox */
+}
+
+.flexlayout__tabset_tabbar_inner::-webkit-scrollbar {
+  display: none; /* Chrome */
+}
+
+
+/* Remove dark glow/shadow from active tabset */
+.flexlayout__tabset-selected {
+  box-shadow: none !important;
+  background-color: var(--background) !important;
+  background-image: none !important;
+}
+
+.flexlayout__tabset_tabbar_outer {
+  background-color: transparent !important;
+  background-image: none !important;
+  border-bottom: none !important;
+  padding: 16px 10px 0 10px !important;
+  min-height: 48px !important;
+  box-shadow: none !important;
+  position: relative !important;
+  overflow: visible !important; /* Let child handle scrolling */
+  white-space: nowrap !important;
+  z-index: 2 !important;
+  /* Hide scrollbar on this container - child handles it */
+  scrollbar-width: none;
+}
+
+/* Only constrain width for top-right tabset (under TopBar) - class added via JS */
+.flexlayout__tabset_tabbar_outer.topbar-constrained {
+  max-width: calc(100% - 420px) !important;
+  width: calc(100% - 420px) !important;
+}
+
+/* Hide scrollbar on parent container for Chrome */
+.flexlayout__tabset_tabbar_outer::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.flexlayout__tabset_tabbar_outer_top {
+  background-color: var(--background) !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+/* Bottom border for the entire tabset header area */
+.flexlayout__tabset_header_sizer {
+  border-bottom: 1px solid rgba(141, 206, 206, 1) !important;
+}
+
+/* Kill ALL gradients and shadows in flexlayout */
+.flexlayout__tabset_content,
+.flexlayout__tabset_sizer,
+.flexlayout__tabset_header,
+.flexlayout__tabset_header_content {
+  background-color: var(--background) !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+.flexlayout__tabset_tabbar_inner {
+  padding: 0 !important;
+  overflow: visible !important;
+}
+
+.flexlayout__tabset_tabbar_inner_tab_container {
+  padding-left: 8px !important;
+  padding-top: 0 !important;
+  display: flex !important;
+  flex-wrap: nowrap !important; /* Ensure no wrapping */
+  flex-shrink: 0 !important; /* Don't shrink */
+  align-items: flex-end !important;
+  overflow: visible !important;
+  width: max-content !important; /* Allow growing beyond container width to trigger scroll */
+  min-width: max-content !important;
+  scrollbar-width: none; /* Firefox */
+}
+
+.flexlayout__tabset_tabbar_inner_tab_container::-webkit-scrollbar {
+  display: none; /* Chrome */
+}
+
+.flexlayout__tab_button {
+  background-color: transparent !important;
+  border: none !important;
+  border-radius: 10px 10px 0 0 !important;
+  color: rgba(141, 206, 206, 0.4) !important;
+  padding: 8px 20px !important;
+  margin-right: 4px !important;
+  margin-bottom: 0 !important;
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+  position: relative !important;
+  z-index: 1 !important;
+  flex-shrink: 0 !important; /* Prevent tabs from shrinking */
+  min-width: fit-content !important;
+}
+
+/* Tab shape with border - transparent bg for inactive */
+.flexlayout__tab_button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: transparent;
+  border: 1px solid rgba(141, 206, 206, 0.2);
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
+  pointer-events: none;
+}
+
+.flexlayout__tab_button:hover {
+  color: rgba(141, 206, 206, 0.8) !important;
+  z-index: 5 !important;
+}
+
+.flexlayout__tab_button:hover::before {
+  border-color: rgba(141, 206, 206, 0.4);
+}
+
+/* Selected tab styling */
+.flexlayout__tab_button--selected {
+  color: #8DCECE !important;
+  z-index: 10 !important;
+  /* Pull tab down to sit on top of the border */
+  position: relative !important;
+  margin-bottom: -1px !important;
+  padding-bottom: 9px !important; /* 8px + 1px to cover border */
+  background: var(--background) !important; /* Solid background to cover border */
+}
+
+.flexlayout__tab_button--selected::before {
+  background: rgba(141, 206, 206, 0.12) !important;
+  border-color: #8DCECE !important;
+  border-bottom: none !important;
+}
+
+
+/* Non-active tabset - selected tab should look dimmer */
+.flexlayout__tabset:not(.flexlayout__tabset-selected) .flexlayout__tab_button--selected {
+  color: rgba(141, 206, 206) !important;
+}
+
+.flexlayout__tabset:not(.flexlayout__tabset-selected) .flexlayout__tab_button--selected::before {
+  background: rgba(0, 0, 0, 0) !important;
+  border-color: rgba(141, 206, 206) !important;
+}
+
+.flexlayout__tab_button_content {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+
+.flexlayout__tab_button_trailing {
+  opacity: 0;
+  margin-left: 8px !important;
+  padding: 2px !important;
+  border-radius: 4px !important;
+  transition: all 0.15s ease !important;
+}
+
+.flexlayout__tab_button:hover .flexlayout__tab_button_trailing,
+.flexlayout__tab_button--selected .flexlayout__tab_button_trailing {
+  opacity: 0.6;
+}
+
+.flexlayout__tab_button_trailing:hover {
+  opacity: 1 !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Tab content area */
+.flexlayout__tab {
+  background-color: var(--background) !important;
+  border: none !important;
+}
+
+/* Splitter styling - resizable borders between panes */
+.flexlayout__splitter {
+  background-color: rgba(141, 206, 206, 0.5) !important;
+}
+
+.flexlayout__splitter_vert {
+  height: 2px !important;
+  min-height: 2px !important;
+}
+
+.flexlayout__splitter_horz {
+  width: 2px !important;
+  min-width: 2px !important;
+}
+
+.flexlayout__splitter:hover,
+.flexlayout__splitter_drag {
+  background-color: #8DCECE !important;
+}
+
+/* Drag indicators */
+.flexlayout__outline_rect {
+  border: 2px solid var(--accent) !important;
+  background-color: rgba(141, 206, 206, 0.1) !important;
+}
+
+.flexlayout__edge_rect {
+  background-color: rgba(141, 206, 206, 0.3) !important;
+}
+
+/* Hide the overflow dropdown - we want scrolling instead */
+.flexlayout__tab_toolbar,
+.flexlayout__tab_toolbar_button {
+  display: none !important;
+}
+
+/* Override FlexLayout's mini scrollbar container to enable scrolling */
+.flexlayout__mini_scrollbar_container {
+  overflow-x: scroll !important;
+  overflow-y: hidden !important;
+  /* Hide scrollbar - Firefox */
+  scrollbar-width: none;
+  /* Enable trackpad/touch scrolling */
+  touch-action: pan-x !important;
+  -webkit-overflow-scrolling: touch !important;
+  overscroll-behavior-x: contain !important;
+}
+
+/* Hide scrollbar - Chrome/Safari */
+.flexlayout__mini_scrollbar_container::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Also enable touch scrolling on parent containers */
+.flexlayout__tabset_tabbar_outer,
+.flexlayout__tabset_tabbar_inner,
+.flexlayout__tabset_tabbar_inner_tab_container {
+  touch-action: pan-x !important;
+  pointer-events: auto !important;
+}
+
+/* Hide borders that look ugly */
+.flexlayout__border_top,
+.flexlayout__border_bottom,
+.flexlayout__border_left,
+.flexlayout__border_right {
+  background-color: var(--background) !important;
+  border: none !important;
+}
+
+.flexlayout__tab_button_trailing {
+  margin-left: 8px;
+  opacity: 0.6;
+}
+.flexlayout__tab_button_trailing:hover {
+  opacity: 1;
+}

@@ -1,0 +1,9 @@
+mcp
+pathway[xpack-llm]
+pydantic
+groq
+python-dotenv
+pdf2image
+numpy
+pandas
+httpx

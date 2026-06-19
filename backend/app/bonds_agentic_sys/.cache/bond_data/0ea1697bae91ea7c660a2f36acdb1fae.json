@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-12-07T03:02:17.503713",
+  "isin": "IN1520220089",
+  "cache_type": "bond_details",
+  "data": {
+    "isin": "IN1520220089",
+    "symbol": "773GJ32",
+    "name": "STATE DEVELOPMENT LOAN 31889 GUJ 10AG32",
+    "face_value": 100.0,
+    "coupon_rate": 7.73,
+    "coupon_frequency": 2,
+    "maturity_date": "2032-08-10",
+    "years_to_maturity": 6.67,
+    "last_traded_price": null,
+    "theoretical_price": 110.27,
+    "current_price": 110.27,
+    "ytm": 6.451,
+    "valuation_date": "2025-12-04",
+    "macaulay_duration": 5.28,
+    "modified_duration": 4.96,
+    "convexity": 33.284
+  }
+}

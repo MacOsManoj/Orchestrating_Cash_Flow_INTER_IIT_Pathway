@@ -1,0 +1,322 @@
+{
+  "comp-1": {
+    "type": "NewsSentimentStream",
+    "data": {
+      "newsItems": [
+        {
+          "headline": "string",
+          "source": "string",
+          "timestamp": "string",
+          "sentimentScore": "number (-1 to 1)"
+        }
+      ]
+    },
+    "description": "Shows a stream of news headlines relevant to assets along with sentiment scores and match percentage."
+  },
+  "comp-2": {
+    "type": "CorrelationMatrixFX",
+    "data": {
+      "labels": [
+        "EUR/INR",
+        "GBP/INR",
+        "JPY/INR",
+        "GBP/USD",
+        "EUR/USD",
+        "USD/JPY"
+      ],
+      "matrix": [
+        [
+          "number (correlation coefficient -1 to 1)"
+        ]
+      ]
+    },
+    "description": "Shows a correlation heatmap between FX pairs (and optionally commodities). 'labels' defines the row/column names and 'matrix' is a square N×N matrix of correlation values from -1 to 1."
+  },
+  "comp-3": {
+    "type": "AllocationDashboard",
+    "data": {
+      "assetClasses": [
+        {
+          "name": "string (asset class name)",
+          "recommended percentage": "number (allocation %)"
+        }
+      ]
+    },
+    "description": "Shows recommended allocation across asset classes"
+  },
+  "comp-5": {
+    "type": "AlertsInsights",
+    "data": [
+      {
+        "title": "string",
+        "timestamp": "string",
+        "severity": "string ('critical' | 'warning' | 'info')"
+      }
+    ],
+    "description": "Shows critical alerts(one or more) relevant to forex trading/stocks/bonds."
+  },
+  "comp-6": {
+    "type": "BondRiskSensitivity",
+    "data": [
+      {
+        "bond_1 name": [
+          "DV01 value"
+        ]
+      },
+      {
+        "bond_2 name": [
+          "DV01 value"
+        ]
+      }
+    ],
+    "description": "Shows the DV01 and PVBP value for one or more bonds"
+  },
+  "comp-7": {
+    "type": "MonteCarloOutputCard",
+    "data": {
+      "results": {
+        "Min Return": "number",
+        "Max Return": "number",
+        "Mean Return": "number",
+        "Median Return": "number",
+        "Std Deviation": "number",
+        "Probability of Loss": "number",
+        "Num Simulations": "number",
+        "Num Days": "number",
+        "ticker": "string",
+        "Analysis Date": "string",
+        "History Days": "number"
+      }
+    },
+    "description": "Displays Monte Carlo simulation metrics for a stock including percentiles, risk measures, distribution statistics, and simulation parameters."
+  },
+  "comp-8": {
+    "type": "AssetPerformance",
+    "data": {
+      "title": "Asset Performance",
+      "subtitle": "Key instruments and their recent performance",
+      "assets": [
+        {
+          "name": "string",
+          "price": "number",
+          "performance": "number (percentage change, e.g. -5.2 or 3.7)"
+        }
+      ]
+    },
+    "description": "Shows a generic list of assets with current price and performance, usable for equities, bonds, FX, or any other instrument."
+  },
+  "comp-9": {
+    "type": "CashAllocationCard",
+    "data": {
+      "title": "Cash & Investments",
+      "subtitle": "Across all asset classes",
+      "freeCashLabel": "Free Cash Available",
+      "investedLabel": "Amount Invested",
+      "freeCashAmount": "number",
+      "investedAmount": "number",
+      "currencySymbol": "₹"
+    },
+    "description": "Shows portfolio-level free cash and invested amount, primarily for portfolio views but can be reused for other asset groupings in specific prompts."
+  },
+  "comp-10": {
+    "type": "LiquidityDashboard",
+    "data": {
+      "metrics": [
+        {
+          "title": "Cash Flow Forecast (Next 7D)",
+          "value": "number"
+        },
+        {
+          "title": "Liquidity Coverage Ratio (LCR)",
+          "value": "number"
+        },
+        {
+          "title": "Total Cash Position",
+          "value": "number"
+        }
+      ]
+    },
+    "description": "Displays high-level liquidity metrics and cash position for a portfolio or treasury system."
+  },
+  "comp-11": {
+    "type": "FundamentalsCard",
+    "data": {
+      "companyName": "string",
+      "fundamentals": [
+        {
+          "label": "string",
+          "value": "value for the label, can be number/string"
+        }
+      ],
+      "technical": [
+        {
+          "label": "string",
+          "value": "value for the label, can be number/string"
+        }
+      ]
+    },
+    "description": "Shows fundamental and technical metrics for a stock. For example, fundamentals label can include Sector, Market Cap, P/E, EPS, Debt/Equity, ROE; technicals can include RSI, moving averages, Bollinger Bands, support and resistance."
+  },
+  "comp-12": {
+    "type": "SentimentAnalysisCard",
+    "data": {
+      "sentimentScore": "can be a number with tag(ex. neutral, bearish etc)",
+      "reasoning": "string (reasoning for the sentiment score)"
+    },
+    "description": "Displays a summarized sentiment score and reasoning generated from analysis of market or asset signals."
+  },
+  "comp-13": {
+    "type": "CurrentValueCard",
+    "data": {
+      "currentValue": "number",
+      "investedAmount": "number",
+      "high": "number",
+      "low": "number"
+    },
+    "description": "Displays current market value, invested amount, and high/low range for a stock or asset."
+  },
+  "comp-14": {
+    "type": "StockPriceHeader",
+    "data": {
+      "stockName": "string (e.g. 'Tata Motors Ltd')",
+      "percentageChange": "number (e.g. -1.25 or 2.5)",
+      "absoluteChange": "number (e.g. -15.30 or 20.45)",
+      "timestamp": "string (e.g. '2024-06-15T10:30:00Z')"
+    },
+    "description": "Shows the stock name, daily price movement, and timestamped market context."
+  },
+  "comp-15": {
+    "type": "BondTermsCard",
+    "data": {
+      "bondName": "2026 8.50% GOI Bond",
+      "couponRate": "8.50%",
+      "maturityDate": "2040-10-15",
+      "rating": "AAA"
+    },
+    "description": "Displays key bond terms such as coupon rate, maturity date, coupon frequency, next coupon date, face value, rating and settlement convention."
+  },
+  "comp-16": {
+    "type": "BondPricingCard",
+    "data": {
+      "lastPrice": "number",
+      "cleanPrice": "number (e.g. 105.00)",
+      "accruedInterest": "number (e.g. 0.57)"
+    },
+    "description": "Shows the current bond quote including last price and daily change, bid/ask levels, bid-ask spread, clean and dirty prices, and accrued interest."
+  },
+  "comp-17": {
+    "type": "CashFlowTable",
+    "data": {
+      "rows": [
+        {
+          "date": "2026-04-15",
+          "openingBalance": "$10,000,000",
+          "inflows": 8500000,
+          "outflows": 6000000,
+          "netCashFlow": 2500000,
+          "endingBalance": "$12,500,000",
+          "lcrPercentage": 128
+        }
+      ]
+    },
+    "description": "Shows period-wise cash inflows, outflows, net cash flow, opening/ending balances, and Liquidity Coverage Ratio (LCR %) for treasury or liquidity monitoring. Can have many rows."
+  },
+  "comp-18": {
+    "type": "GeneralCard",
+    "data": {
+      "title": "string (main heading)",
+      "subtitle": "string (optional sub-heading)",
+      "items": [
+        {
+          "label": "string (metric or field name)",
+          "value": "string or number (metric value)",
+          "helperText": "string (optional extra context, e.g. 'vs last month')"
+        }
+      ],
+      "footer": "string (optional summary or note)"
+    },
+    "description": "Generic key-value card used to render small sets of metrics or facts for any asset, portfolio, or context when no specialised component exists."
+  },
+  "comp-19": {
+    "type": "CashBalanceForecastChart",
+    "data": {
+      "points": [
+        {
+          "day": "number (0-30, sequential day index)",
+          "amount": "number (cash balance in raw units, e.g. 22000000)",
+          "date": "string (optional ISO or readable date)"
+        }
+      ]
+    },
+    "description": "Shows a 30-day projected cash balance trend."
+  },
+  "comp-20": {
+    "type": "FxPriceChart",
+    "data": {
+      "currencyPair": "string (e.g. 'EUR/USD')",
+      "points": [
+        {
+          "date": "string (ISO date or label, e.g. '2025-02-01')",
+          "value": "number (FX rate for that day)"
+        }
+      ]
+    },
+    "description": "Shows the FX rate over time for a specific currency pair, with range filters for 1W, 1M, 1Y, and YTD."
+  },
+  "comp-21": {
+    "type": "StockCandlestickChart",
+    "data": {
+      "symbol": "string (stock name or ticker, e.g. 'AAPL', 'TSLA', 'RELIANCE')",
+      "points": [
+        {
+          "date": "string (ISO date or any valid date format, e.g. '2025-02-01')",
+          "high": "number (daily high price)",
+          "low": "number (daily low price)",
+          "open": "number (optional — opening price for the day)",
+          "close": "number (optional — closing price for the day)"
+        }
+      ]
+    },
+    "description": "Renders a candlestick chart showing high/low ranges for each day, and optionally open and close values. Intended for stocks but compatible with any instrument that has daily price ranges."
+  },
+  "comp-22": {
+    "type": "BondYieldTimeChart",
+    "data": {
+      "bondName": "string (e.g. 'US 10Y Treasury')",
+      "points": [
+        {
+          "date": "string (e.g. '2025-01-15' or '2025-01-15T00:00:00Z')",
+          "yield": "number (yield in %, e.g. 4.25)"
+        }
+      ]
+    },
+    "description": "Shows the bond yield over time (1Y window), plotted as a line chart with date on the x-axis."
+  },
+  "comp-23": {
+    "type": "RateVsYieldChart",
+    "data": {
+      "curveName": "Credit Spread Curve",
+      "points": [
+        {
+          "rate": "number (x-axis, e.g. coupon or risk-free rate)",
+          "yield": "number (y-axis, yield in %)"
+        }
+      ]
+    },
+    "description": "Shows the relationship between rate and yield as a scatter/curve chart (1Y view)."
+  },
+  "comp-24": {
+    "type": "BondPriceTimeChart",
+    "data": {
+      "bondName": "string (e.g. 'US Treasury 10Y')",
+      "points": [
+        {
+          "date": "string (e.g. '2025-01-15')",
+          "price": "number (clean or close price for that day)"
+        }
+      ]
+    },
+    "period": "1Y",
+    "description": "Shows the bond price over time (1Y), plotted as a line chart with index-based x-axis. Dates are shown only in the tooltip."
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "timestamp": "2025-12-07T01:47:54.170008",
+  "isin": "IN0020140011",
+  "days_ahead": 21,
+  "cache_type": "bond_price",
+  "data": {
+    "bond_symbol": "86GS2028",
+    "bond_isin": "IN0020140011",
+    "bond_name": "GOVERNMENT OF INDIA 16937 GOI 02JU28",
+    "day": 21,
+    "date": "2026-01-01",
+    "estimated_price": 107.08,
+    "ytm_percent": 5.83,
+    "maturity_date": "2028-06-02",
+    "coupon_rate": 8.6,
+    "bond_type": "Government",
+    "rating": "AAA",
+    "risk_level": "Low"
+  }
+}

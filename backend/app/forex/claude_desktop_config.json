@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "forex-agent": {
+      "command": "python",
+      "args": ["/home/nightfury/Desktop/pathway/forex/fx/mcp_server.py"],
+      "env": {
+        "PATHWAY_LICENSE_KEY": "YOUR_PATHWAY_LICENSE_KEY",
+        "NEWSDATA_API_KEY": "pub_4794bcd33ee04c3bb0289ce6cf08febd",
+        "MCP_HOST": "localhost",
+        "MCP_PORT": "8123"
+      }
+    }
+  }
+}
+

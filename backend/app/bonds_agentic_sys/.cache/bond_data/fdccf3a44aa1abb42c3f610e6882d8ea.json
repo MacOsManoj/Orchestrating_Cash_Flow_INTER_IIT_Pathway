@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-12-07T03:36:04.004148",
+  "isin": "IN0020250067",
+  "cache_type": "bond_details",
+  "data": {
+    "isin": "IN0020250067",
+    "symbol": "601GS2030",
+    "name": "GOVERNMENT OF INDIA 36232 GOI 21JL30",
+    "face_value": 100.0,
+    "coupon_rate": 6.01,
+    "coupon_frequency": 2,
+    "maturity_date": "2030-07-21",
+    "years_to_maturity": 4.62,
+    "last_traded_price": 100.65,
+    "theoretical_price": 102.08,
+    "current_price": 100.65,
+    "ytm": 6.171,
+    "valuation_date": "2025-12-04",
+    "macaulay_duration": 4.019,
+    "modified_duration": 3.785,
+    "convexity": 19.311
+  }
+}

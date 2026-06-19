@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-12-07T03:02:17.041785",
+  "isin": "IN0020180454",
+  "cache_type": "bond_details",
+  "data": {
+    "isin": "IN0020180454",
+    "symbol": "726GS2029",
+    "name": "GOVERNMENT OF INDIA 21176 GOI 14JN29",
+    "face_value": 100.0,
+    "coupon_rate": 7.26,
+    "coupon_frequency": 2,
+    "maturity_date": "2029-01-14",
+    "years_to_maturity": 3.1,
+    "last_traded_price": 104.5,
+    "theoretical_price": 106.76,
+    "current_price": 104.5,
+    "ytm": 5.955,
+    "valuation_date": "2025-12-04",
+    "macaulay_duration": 2.774,
+    "modified_duration": 2.618,
+    "convexity": 9.887
+  }
+}

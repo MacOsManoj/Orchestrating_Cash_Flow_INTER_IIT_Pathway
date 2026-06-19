@@ -1,0 +1,210 @@
+# Forex Trading Pipeline Configuration
+# All settings for the unified trading system
+
+# ============================================================================
+# TRADING MODELS CONFIGURATION
+# ============================================================================
+models:
+  # Available model types: "single_train", "walk_forward"
+  active_models:
+    - name: "inr_model"
+      type: "single_train"  # Options: "single_train", "walk_forward"
+      pairs: ["EURINR", "GBPINR", "JPYINR"]
+      description: "EUR, GBP, JPY/INR single model"
+      
+    - name: "usdjpy_model"
+      type: "single_train"
+      pairs: ["USDJPY"]
+      use_bond_yield: false  # Without the extra bond yield feature
+      description: "USDJPY single model"
+      
+    - name: "usd_model"
+      type: "single_train"
+      pairs: ["EURUSD", "GBPUSD"]
+      description: "EUR, GBP/USD single model"
+
+  # Model storage
+  model_dir: "trained_models/"
+  save_models: true
+  load_existing: true
+
+# ============================================================================
+# FEATURE ENGINEERING CONFIGURATION
+# ============================================================================
+features:
+  ewma_alpha: 0.25
+  sma_fast: 10
+  sma_slow: 50
+  macd_fast: 12
+  macd_slow: 26
+  macd_signal: 9
+  rsi_period: 14
+  atr_period: 14
+  lag_returns: 10
+  
+  # Volatility settings (for USDJPY and advanced features)
+  volatility:
+    windows: [10, 20, 60]
+    annualize: true
+    eps: 1.0e-9
+    
+  # Fractional differencing (for USDJPY)
+  frac_diff:
+    d: 0.4
+    threshold: 1.0e-5
+
+# ============================================================================
+# LABELING & TRAINING CONFIGURATION
+# ============================================================================
+training:
+  horizon: 3
+  target_scaling: 100
+  train_ratio: 0.8
+  
+  # Walk-forward specific settings
+  walk_forward:
+    train_window: 444
+    test_window: 111
+    step_size: 111
+
+# ============================================================================
+# XGBoost MODEL PARAMETERS
+# ============================================================================
+xgboost:
+  n_estimators: 200
+  max_depth: 4
+  learning_rate: 0.05
+  subsample: 0.8
+  colsample_bytree: 0.8
+  reg_alpha: 0.1
+  reg_lambda: 1.0
+  objective: "reg:squarederror"
+  n_jobs: -1
+  random_state: 42
+  early_stopping_rounds: 20
+
+# ============================================================================
+# TRADING STRATEGY CONFIGURATION
+# ============================================================================
+trading:
+  spread_cost: 0.0002
+  pct_cost: 0.0001
+  slippage: 0.0001
+  stop_loss: 0.01  # 1% stop loss threshold
+  
+  # Position sizing - Sharpe Fraction (Full Portfolio)
+  position_sizing:
+    method: "sharpe"  # Options: "kelly", "fixed", "volatility_adjusted", "sharpe"
+    kelly_fraction: 1.0  # Full Kelly (used when method is "kelly")
+    sharpe_scaling: 1.0  # Full allocation per unit of Sharpe (no scaling)
+    max_position_pct: 1.0  # Maximum 100% of portfolio per trade (full portfolio)
+    min_position_pct: 0.0  # No minimum
+    portfolio_capital: 100000  # Default portfolio capital in USD
+
+# ============================================================================
+# DATA SOURCES CONFIGURATION
+# ============================================================================
+data:
+  # Historical data directory
+  data_dir: "data/"
+  
+  # Polygon.io API configuration
+  polygon:
+    api_key: "${POLYGON_API_KEY}"  # Set via environment variable
+    base_url: "https://api.polygon.io"
+    timespan: "day"  # Options: "minute", "hour", "day", "week"
+    
+  # Bond yield spread data (for USDJPY)
+  bond_spread_file: "spread_bond_yield.csv"
+  
+  # Supported currency pairs
+  all_pairs:
+    - "EURINR"
+    - "GBPINR"
+    - "JPYINR"
+    - "EURUSD"
+    - "GBPUSD"
+    - "USDJPY"
+
+# ============================================================================
+# PATHWAY CONNECTOR CONFIGURATION
+# ============================================================================
+pathway:
+  # Connector type for real-time data
+  connector: "polling"  # Options: "polling", "webhook"
+  polling_interval_seconds: 300  # 5 minutes for daily data check
+  
+  # Persistence settings
+  persistence:
+    enabled: true
+    backend: "filesystem"
+    storage_dir: "pipeline_state/"
+
+# ============================================================================
+# FOREX AGENT CONFIGURATION
+# ============================================================================
+forex_agent:
+  # LLM settings
+  llm:
+    model: "gemini/gemini-2.5-flash-lite"
+    temperature: 0
+    api_key: "${GEMINI_API_KEY}"  # Set via environment variable
+  
+  # News agent settings
+  news_agent:
+    enabled: true
+    newsdata_api_key: "${NEWSDATA_API_KEY}"  # Set via environment variable
+    max_articles_per_query: 5
+    analysis_enabled: true  # LLM provides its own analysis
+    
+  # Tool parallelism
+  parallel_tools: true
+  max_concurrent_tools: 5
+
+# ============================================================================
+# API SERVER CONFIGURATION
+# ============================================================================
+api:
+  host: "0.0.0.0"
+  port: 8000
+  reload: false
+  workers: 4
+  
+  # CORS settings
+  cors:
+    allow_origins: ["*"]
+    allow_methods: ["*"]
+    allow_headers: ["*"]
+
+# ============================================================================
+# LOGGING & MONITORING
+# ============================================================================
+logging:
+  level: "INFO"  # Options: DEBUG, INFO, WARNING, ERROR
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/forex_pipeline.log"
+  rotate_size_mb: 10
+  backup_count: 5
+
+# ============================================================================
+# OUTPUT FILES
+# ============================================================================
+
+output:
+  positions_file: "positions.json"
+  trades_file: "trades.json"
+  signals_file: "signals.json"
+  metrics_dir: "metrics/"
+  results_dir: "results/"
+
+
+# ============================================================================
+# DATABASE CONFIGURATION
+# ============================================================================
+database:
+  mongodb:
+    uri: "${MONGODB_URI}"  # Set via environment variable, defaults to mongodb://localhost:27017
+    database_name: "forex_trading"
+    collections:
+      positions: "positions"
+      trades: "trades"

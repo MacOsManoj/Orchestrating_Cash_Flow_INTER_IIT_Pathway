@@ -1,0 +1,20 @@
+{
+  "timestamp": "2025-12-07T03:36:04.106478",
+  "isin": "IN0020250067",
+  "days_ahead": 21,
+  "cache_type": "bond_price",
+  "data": {
+    "bond_symbol": "601GS2030",
+    "bond_isin": "IN0020250067",
+    "bond_name": "GOVERNMENT OF INDIA 36232 GOI 21JL30",
+    "day": 21,
+    "date": "2026-01-01",
+    "estimated_price": 102.54,
+    "ytm_percent": 6.172,
+    "maturity_date": "2030-07-21",
+    "coupon_rate": 6.01,
+    "bond_type": "Government",
+    "rating": "AAA",
+    "risk_level": "Low"
+  }
+}

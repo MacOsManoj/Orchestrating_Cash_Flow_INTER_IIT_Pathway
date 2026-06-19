@@ -1,0 +1,4 @@
+modal
+PyMuPDF
+langchain-text-splitters
+requests

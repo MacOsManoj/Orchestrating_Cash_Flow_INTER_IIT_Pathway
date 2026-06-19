@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-12-07T01:47:50.186913",
+  "isin": "IN0020250026",
+  "cache_type": "bond_details",
+  "data": {
+    "isin": "IN0020250026",
+    "symbol": "633GS2035",
+    "name": "GOVERNMENT OF INDIA 35943 GOI 05MY35",
+    "face_value": 100.0,
+    "coupon_rate": 6.33,
+    "coupon_frequency": 2,
+    "maturity_date": "2035-05-05",
+    "years_to_maturity": 9.4,
+    "last_traded_price": 99.5,
+    "theoretical_price": 100.29,
+    "current_price": 99.5,
+    "ytm": 6.529,
+    "valuation_date": "2025-12-04",
+    "macaulay_duration": 7.19,
+    "modified_duration": 6.749,
+    "convexity": 60.176
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "timestamp": "2025-12-07T01:47:52.560976",
+  "isin": "IN0020230135",
+  "days_ahead": 21,
+  "cache_type": "bond_price",
+  "data": {
+    "bond_symbol": "732GS2030",
+    "bond_isin": "IN0020230135",
+    "bond_name": "GOVERNMENT OF INDIA 33618 GOI 13NV30",
+    "day": 21,
+    "date": "2026-01-01",
+    "estimated_price": 106.1,
+    "ytm_percent": 6.224,
+    "maturity_date": "2030-11-13",
+    "coupon_rate": 7.32,
+    "bond_type": "Government",
+    "rating": "AAA",
+    "risk_level": "Low"
+  }
+}

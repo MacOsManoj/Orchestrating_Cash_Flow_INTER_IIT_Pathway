@@ -1,0 +1,5 @@
+# Native async worker - high throughput streaming
+aiokafka
+google-generativeai
+pymongo
+confluent-kafka

@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-12-07T03:02:14.896686",
+  "isin": "IN0020210020",
+  "cache_type": "bond_details",
+  "data": {
+    "isin": "IN0020210020",
+    "symbol": "664GS2035",
+    "name": "GOVERNMENT OF INDIA 30244 GOI 16JU35",
+    "face_value": 100.0,
+    "coupon_rate": 6.64,
+    "coupon_frequency": 2,
+    "maturity_date": "2035-06-16",
+    "years_to_maturity": 9.52,
+    "last_traded_price": 98.0,
+    "theoretical_price": 105.08,
+    "current_price": 98.0,
+    "ytm": 6.528,
+    "valuation_date": "2025-12-04",
+    "macaulay_duration": 7.017,
+    "modified_duration": 6.587,
+    "convexity": 59.103
+  }
+}

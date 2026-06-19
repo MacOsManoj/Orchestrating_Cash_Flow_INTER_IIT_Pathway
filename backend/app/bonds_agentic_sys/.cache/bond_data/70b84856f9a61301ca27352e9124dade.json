@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-12-07T03:02:17.843813",
+  "isin": "IN0020200070",
+  "cache_type": "bond_details",
+  "data": {
+    "isin": "IN0020200070",
+    "symbol": "579GS2030",
+    "name": "GOVERNMENT OF INDIA 23145 GOI 11MY30",
+    "face_value": 100.0,
+    "coupon_rate": 5.79,
+    "coupon_frequency": 2,
+    "maturity_date": "2030-05-11",
+    "years_to_maturity": 4.42,
+    "last_traded_price": 99.4,
+    "theoretical_price": 99.48,
+    "current_price": 99.4,
+    "ytm": 6.145,
+    "valuation_date": "2025-12-04",
+    "macaulay_duration": 3.956,
+    "modified_duration": 3.727,
+    "convexity": 18.42
+  }
+}

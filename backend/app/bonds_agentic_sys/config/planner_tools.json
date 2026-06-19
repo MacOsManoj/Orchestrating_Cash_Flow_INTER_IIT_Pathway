@@ -1,0 +1,640 @@
+{
+  "tools": [
+    {
+      "name": "get_latest_yields",
+      "aliases": ["get_current_yields"],
+      "category": "yield_analytics",
+      "description": "Returns current yield rates for 1Y, 2Y, 5Y, 7Y, 10Y maturities from live bond market data",
+      "data_source": "mcp_server",
+      "requires_agents": false,
+      "parameters": [],
+      "trigger_phrases": [
+        "current yields",
+        "latest yields",
+        "today's yields",
+        "present yields",
+        "what are yields",
+        "show yields",
+        "yield rates",
+        "rates now",
+        "government bond yields",
+        "bond yields",
+        "g-sec yields",
+        "gsec rates"
+      ],
+      "examples": [
+        "What are the current government bond yields",
+        "Show me latest yields",
+        "What are yields today"
+      ],
+      "notes": "PRIORITY TOOL for yield queries - DO NOT use web_search instead. INFORMATION ONLY - NO agents needed."
+    },
+    {
+      "name": "get_yield_forecast",
+      "category": "yield_analytics",
+      "description": "Forecasts specific maturity (1, 2, 5, 7, or 10 years) with day-by-day predictions up to 21 days",
+      "data_source": "mcp_server",
+      "requires_agents": false,
+      "parameters": [
+        {
+          "name": "maturity",
+          "type": "int",
+          "required": true,
+          "description": "Target maturity in years (1, 2, 5, 7, or 10)",
+          "extraction_rules": {
+            "5Y": 5,
+            "5-year": 5,
+            "5 year": 5,
+            "five year": 5,
+            "10Y": 10,
+            "10-year": 10,
+            "10 year": 10,
+            "ten year": 10,
+            "2Y": 2,
+            "2-year": 2,
+            "2 year": 2,
+            "two year": 2,
+            "7Y": 7,
+            "7-year": 7,
+            "7 year": 7,
+            "seven year": 7,
+            "1Y": 1,
+            "1-year": 1,
+            "1 year": 1,
+            "one year": 1
+          }
+        },
+        {
+          "name": "days_ahead",
+          "type": "int",
+          "required": false,
+          "default": 21,
+          "description": "Number of days to forecast (max 21)"
+        }
+      ],
+      "trigger_phrases": [
+        "forecast for {maturity}",
+        "{maturity} yield forecast",
+        "what will {maturity} yield be",
+        "predict {maturity} yield",
+        "future {maturity} rate"
+      ],
+      "examples": [
+        "What are the yield forecasts for 5y government bonds",
+        "Predict 10-year yield for next week"
+      ]
+    },
+    {
+      "name": "get_all_yield_forecasts",
+      "aliases": ["forecast_all_yields"],
+      "category": "yield_analytics",
+      "description": "Gets 21-day forecasts for ALL maturities (1Y through 10Y). MANDATORY when ML Model agent is needed.",
+      "data_source": "mcp_server",
+      "requires_agents": false,
+      "parameters": [],
+      "trigger_phrases": [
+        "yield forecasts",
+        "forecast all yields",
+        "all maturities forecast"
+      ],
+      "examples": [
+        "What are the yield forecasts",
+        "Forecast all yields",
+        "Recommend bonds"
+      ],
+      "notes": "Returns complete forecast matrix for all tenors. Required for predictions and ML insights."
+    },
+    {
+      "name": "get_yield_curve",
+      "category": "yield_analytics",
+      "description": "Returns complete yield curve shape for specific forecast date",
+      "data_source": "mcp_server",
+      "requires_agents": false,
+      "parameters": [
+        {
+          "name": "days_ahead",
+          "type": "int",
+          "required": true,
+          "description": "Forecast date in days (1-21)"
+        }
+      ],
+      "trigger_phrases": [
+        "show yield curve",
+        "curve shape",
+        "is curve inverted",
+        "yield curve analysis"
+      ]
+    },
+    {
+      "name": "list_bonds",
+      "aliases": ["fetch_bond_universe"],
+      "category": "bond_discovery",
+      "description": "Returns all 169 available bonds with symbol, ISIN, name, coupon, and maturity date",
+      "data_source": "mcp_server",
+      "requires_agents": false,
+      "parameters": [],
+      "trigger_phrases": [
+        "show all bonds",
+        "what bonds exist",
+        "list bonds",
+        "available bonds"
+      ],
+      "conditional_agents": "If user asks for RECOMMENDATIONS, add agents: [ml_model, analyst, scoring, advisory]. If just wants LIST, no agents needed.",
+      "examples": [
+        "Show all bonds",
+        "List available bonds"
+      ]
+    },
+    {
+      "name": "search_bonds",
+      "category": "bond_discovery",
+      "description": "Search bonds by symbol, ISIN, or name",
+      "data_source": "mcp_server",
+      "requires_agents": false,
+      "parameters": [
+        {
+          "name": "search_term",
+          "type": "string",
+          "required": true,
+          "description": "Search query (symbol, ISIN, or name)"
+        }
+      ],
+      "trigger_phrases": [
+        "find {type} bonds",
+        "search for bonds",
+        "bonds containing {term}"
+      ],
+      "examples": [
+        "Find government bonds",
+        "Show Tata bonds",
+        "Bonds maturing in 2028"
+      ]
+    },
+    {
+      "name": "get_bond_info",
+      "category": "bond_discovery",
+      "description": "Get detailed specifications for ONE specific bond (ISIN, face value, coupon, frequency, maturity)",
+      "data_source": "mcp_server",
+      "requires_agents": false,
+      "parameters": [
+        {
+          "name": "bond_identifier",
+          "type": "string",
+          "required": true,
+          "description": "Bond symbol or ISIN"
+        }
+      ],
+      "trigger_phrases": [
+        "what is the ISIN of {bond}",
+        "tell me about bond {identifier}",
+        "details on {bond}",
+        "information about {bond}"
+      ],
+      "notes": "INFORMATION ONLY - NO agents needed. This is just a lookup, not a recommendation."
+    },
+    {
+      "name": "filter_bonds",
+      "category": "bond_discovery",
+      "description": "Multi-criteria bond filtering with optional parameters",
+      "data_source": "mcp_server",
+      "requires_agents": false,
+      "parameters": [
+        {
+          "name": "min_coupon",
+          "type": "float",
+          "required": false,
+          "default": 0
+        },
+        {
+          "name": "max_coupon",
+          "type": "float",
+          "required": false,
+          "default": 0
+        },
+        {
+          "name": "min_years_to_maturity",
+          "type": "float",
+          "required": false,
+          "default": 0
+        },
+        {
+          "name": "max_years_to_maturity",
+          "type": "float",
+          "required": false,
+          "default": 0
+        },
+        {
+          "name": "symbol_contains",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "name_contains",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "trigger_phrases": [
+        "find bonds with {criteria}",
+        "filter bonds by {criteria}",
+        "show high coupon bonds"
+      ],
+      "examples": [
+        "Find bonds with 6-8% coupon and 5-10 year maturity",
+        "Show high coupon bonds",
+        "Bonds maturing in 5 years"
+      ]
+    },
+    {
+      "name": "get_bond_price",
+      "category": "bond_valuation",
+      "description": "Get price forecast for specific bond. If days_ahead=0, returns all 21 days trajectory with % changes",
+      "data_source": "mcp_server",
+      "requires_agents": false,
+      "parameters": [
+        {
+          "name": "bond_identifier",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "days_ahead",
+          "type": "int",
+          "required": true,
+          "description": "0 for full trajectory, or specific day (1-21)"
+        }
+      ],
+      "trigger_phrases": [
+        "what will bond {id} cost",
+        "price trajectory for {bond}",
+        "bond price forecast"
+      ]
+    },
+    {
+      "name": "calculate_bond_ytm",
+      "category": "bond_valuation",
+      "description": "Calculate yield-to-maturity based on current yield curve",
+      "data_source": "mcp_server",
+      "requires_agents": false,
+      "parameters": [
+        {
+          "name": "bond_identifier",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "trigger_phrases": [
+        "what's the YTM",
+        "yield to maturity",
+        "calculate YTM"
+      ]
+    },
+    {
+      "name": "calculate_bond_duration",
+      "category": "bond_valuation",
+      "description": "Calculate duration and convexity metrics (Macaulay duration, modified duration, convexity)",
+      "data_source": "mcp_server",
+      "requires_agents": false,
+      "parameters": [
+        {
+          "name": "bond_identifier",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "trigger_phrases": [
+        "how sensitive is this bond",
+        "duration analysis",
+        "interest rate risk",
+        "bond duration"
+      ]
+    },
+    {
+      "name": "compare_bonds",
+      "category": "bond_analysis",
+      "description": "Side-by-side comparison of multiple bonds (YTM, price, duration, convexity)",
+      "data_source": "mcp_server",
+      "requires_agents": false,
+      "parameters": [
+        {
+          "name": "bond_identifiers",
+          "type": "string",
+          "required": true,
+          "description": "Comma-separated bond symbols/ISINs (e.g., '667GS2035,717GS2030')"
+        }
+      ],
+      "trigger_phrases": [
+        "compare bond {A} vs {B}",
+        "which is better {X} or {Y}",
+        "comparison of {bonds}"
+      ]
+    },
+    {
+      "name": "recommend_bonds",
+      "category": "bond_analysis",
+      "description": "AI-powered bond recommendations with filtering",
+      "data_source": "mcp_server",
+      "requires_agents": true,
+      "required_agents": ["ml_model", "analyst", "scoring", "advisory"],
+      "parameters": [
+        {
+          "name": "target_yield",
+          "type": "float",
+          "required": false,
+          "description": "Minimum desired yield (e.g., 6.5 for 6.5%)"
+        },
+        {
+          "name": "max_risk",
+          "type": "string",
+          "required": false,
+          "enum": ["low", "medium", "high"],
+          "description": "low (duration<3Y), medium (duration<7Y), high (any duration)"
+        },
+        {
+          "name": "investment_horizon",
+          "type": "float",
+          "required": false,
+          "description": "Preferred years to maturity"
+        },
+        {
+          "name": "sort_by",
+          "type": "string",
+          "required": false,
+          "enum": ["yield", "duration", "price"]
+        }
+      ],
+      "trigger_phrases": [
+        "recommend bonds",
+        "best bonds to invest",
+        "suggest bonds with {criteria}"
+      ],
+      "examples": [
+        "Recommend bonds with 6.5% yield and medium risk",
+        "Find best bonds for 10 year investment"
+      ]
+    },
+    {
+      "name": "news_scraper",
+      "category": "external_data",
+      "description": "Fetch recent news articles about bonds and financial markets",
+      "data_source": "web_scraping",
+      "requires_agents": false,
+      "parameters": [
+        {
+          "name": "keywords",
+          "type": "array",
+          "required": true,
+          "description": "List of keywords to search for"
+        },
+        {
+          "name": "hours_back",
+          "type": "int",
+          "required": false,
+          "default": 24,
+          "description": "How many hours back to search"
+        }
+      ]
+    },
+    {
+      "name": "crisil_scraper",
+      "category": "external_data",
+      "description": "Fetch CRISIL credit ratings for bonds",
+      "data_source": "crisil_api",
+      "requires_agents": false,
+      "parameters": [
+        {
+          "name": "bond_identifier",
+          "type": "string",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "portfolio_manager",
+      "category": "portfolio",
+      "description": "Access and analyze user's bond portfolio",
+      "data_source": "user_portfolio",
+      "requires_agents": false,
+      "parameters": [],
+      "trigger_phrases": [
+        "my portfolio",
+        "my bonds",
+        "my holdings",
+        "portfolio analysis"
+      ]
+    },
+    {
+      "name": "rag_retriever",
+      "category": "knowledge",
+      "description": "Retrieve relevant information from document store (RBI policies, historical data, bond documentation)",
+      "data_source": "rag_store",
+      "requires_agents": false,
+      "parameters": [
+        {
+          "name": "query",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "trigger_phrases": [
+        "what does the document say",
+        "historical analysis",
+        "RBI policy on",
+        "past performance"
+      ]
+    }
+  ],
+  "agents": [
+    {
+      "name": "query_classifier",
+      "type": "classifier",
+      "description": "Classifies user intent and routes to appropriate processing pipeline",
+      "capabilities": [
+        "Intent classification",
+        "Query type detection",
+        "Context extraction"
+      ]
+    },
+    {
+      "name": "ml_model",
+      "type": "prediction",
+      "description": "Machine learning model for bond valuation, yield prediction, and risk assessment",
+      "capabilities": [
+        "Yield forecasting",
+        "Price prediction",
+        "Risk scoring",
+        "Pattern recognition"
+      ],
+      "required_for": [
+        "Bond recommendations",
+        "Investment advice",
+        "Predictive analysis"
+      ]
+    },
+    {
+      "name": "analyst",
+      "type": "analysis",
+      "description": "Financial analyst agent that interprets data and provides market insights",
+      "capabilities": [
+        "Market analysis",
+        "Bond valuation",
+        "Risk assessment",
+        "Comparative analysis"
+      ],
+      "required_for": [
+        "Investment recommendations",
+        "Market insights",
+        "Bond comparison"
+      ]
+    },
+    {
+      "name": "scoring",
+      "type": "evaluation",
+      "description": "Scores and ranks bonds based on multiple criteria (yield, risk, duration, liquidity)",
+      "capabilities": [
+        "Multi-criteria scoring",
+        "Bond ranking",
+        "Risk-return optimization",
+        "Portfolio optimization"
+      ],
+      "required_for": [
+        "Bond recommendations",
+        "Portfolio construction",
+        "Investment decisions"
+      ]
+    },
+    {
+      "name": "advisory",
+      "type": "recommendation",
+      "description": "Provides investment advice and actionable recommendations to users",
+      "capabilities": [
+        "Investment recommendations",
+        "Risk-adjusted suggestions",
+        "Portfolio advice",
+        "Market guidance"
+      ],
+      "required_for": [
+        "Investment decisions",
+        "Buy/sell recommendations",
+        "Portfolio management"
+      ]
+    },
+    {
+      "name": "explainability",
+      "type": "explanation",
+      "description": "Provides detailed explanations for model predictions and recommendations",
+      "capabilities": [
+        "Decision explanation",
+        "Feature importance",
+        "Reasoning transparency",
+        "Model interpretation"
+      ],
+      "trigger_phrases": [
+        "why",
+        "explain",
+        "reason",
+        "how did you decide"
+      ]
+    }
+  ],
+  "planning_rules": [
+    {
+      "rule": "efficiency",
+      "description": "Only select components absolutely necessary to answer the query"
+    },
+    {
+      "rule": "no_agents_for_lookups",
+      "description": "If query is just asking for information (ISIN, coupon, maturity, yields), use ONLY tools, NO agents",
+      "examples": [
+        {
+          "query": "What is the ISIN of X",
+          "tools": ["get_bond_info"],
+          "agents": []
+        },
+        {
+          "query": "What are current yields",
+          "tools": ["get_latest_yields"],
+          "agents": []
+        },
+        {
+          "query": "Tell me about bond X",
+          "tools": ["get_bond_info"],
+          "agents": []
+        }
+      ]
+    },
+    {
+      "rule": "agents_for_recommendations",
+      "description": "Only add agents (ml_model, analyst, scoring, advisory) when user explicitly asks for recommendations",
+      "examples": [
+        {
+          "query": "Recommend bonds",
+          "tools": ["list_bonds", "get_all_yield_forecasts"],
+          "agents": ["ml_model", "analyst", "scoring", "advisory"]
+        },
+        {
+          "query": "Should I buy X",
+          "tools": ["get_bond_info", "get_all_yield_forecasts"],
+          "agents": ["ml_model", "analyst", "scoring", "advisory"]
+        },
+        {
+          "query": "Best bonds to invest in",
+          "tools": ["list_bonds", "get_all_yield_forecasts"],
+          "agents": ["ml_model", "analyst", "scoring", "advisory"]
+        }
+      ]
+    },
+    {
+      "rule": "explainability_on_demand",
+      "description": "Only use explainability agent if user explicitly asks 'why', 'explain', 'reason'"
+    },
+    {
+      "rule": "portfolio_context",
+      "description": "Use portfolio_manager only if query mentions 'my portfolio', 'my bonds', 'my holdings'"
+    },
+    {
+      "rule": "rag_for_knowledge",
+      "description": "Use RAG retriever for queries about documents, historical analysis, RBI policies"
+    },
+    {
+      "rule": "parameterize_tools",
+      "description": "Provide relevant parameters based on the query context"
+    }
+  ],
+  "query_patterns": {
+    "information_only": {
+      "patterns": [
+        "what is",
+        "tell me about",
+        "show me",
+        "list",
+        "current",
+        "latest"
+      ],
+      "agents_needed": false
+    },
+    "recommendations": {
+      "patterns": [
+        "recommend",
+        "suggest",
+        "best",
+        "should I buy",
+        "what to invest",
+        "which bonds"
+      ],
+      "agents_needed": true,
+      "required_agents": ["ml_model", "analyst", "scoring", "advisory"]
+    },
+    "explanation": {
+      "patterns": [
+        "why",
+        "explain",
+        "reason",
+        "how did",
+        "what makes"
+      ],
+      "agents_needed": true,
+      "required_agents": ["explainability"]
+    }
+  }
+}

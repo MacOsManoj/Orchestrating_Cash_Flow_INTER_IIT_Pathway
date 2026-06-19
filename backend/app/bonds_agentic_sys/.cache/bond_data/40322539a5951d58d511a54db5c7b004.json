@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-12-07T03:02:15.935998",
+  "isin": "IN0020250034",
+  "cache_type": "bond_details",
+  "data": {
+    "isin": "IN0020250034",
+    "symbol": "591GS2028",
+    "name": "GOVERNMENT OF INDIA 36133 GOI 30JU28",
+    "face_value": 100.0,
+    "coupon_rate": 5.91,
+    "coupon_frequency": 2,
+    "maturity_date": "2028-06-30",
+    "years_to_maturity": 2.56,
+    "last_traded_price": 101.6,
+    "theoretical_price": 102.86,
+    "current_price": 101.6,
+    "ytm": 5.867,
+    "valuation_date": "2025-12-04",
+    "macaulay_duration": 2.364,
+    "modified_duration": 2.233,
+    "convexity": 7.4
+  }
+}

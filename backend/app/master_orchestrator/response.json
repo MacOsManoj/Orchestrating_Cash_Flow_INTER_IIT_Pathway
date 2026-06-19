@@ -1,0 +1,126 @@
+{
+    "agents_used": [
+        "news_agent",
+        "twitter_agent",
+        "technical_agent (Failed)",
+        "fundamental_agent",
+        "montecarlo_agent (Failed)"
+    ],
+    "response": {
+        "agents_invoked": [
+            "news_agent",
+            "twitter_agent",
+            "technical_agent",
+            "fundamental_agent",
+            "montecarlo_agent"
+        ],
+        "fundamental_output": {
+            "RELIANCE": {
+                "analysis_summary": {
+                    "recommendation": "Buy",
+                    "thesis_summary": "Reliance Industries is positioned to benefit from strong revenue growth and strategic investments in diverse sectors."
+                },
+                "core_assumptions": {
+                    "justification": "Assumptions are based on historical revenue growth trends, expected operational efficiencies, and stable macroeconomic conditions.",
+                    "revenue_cagr_2yr_percent": 9.0,
+                    "target_operating_margin_year2_percent": 12.5,
+                    "terminal_growth_percent": 3.0,
+                    "wacc_percent": 10.0
+                },
+                "current_financials_fy": {
+                    "ebitda_cr": 165718.0,
+                    "fcf_cr": 38736.0,
+                    "fiscal_year": "2025",
+                    "net_income_cr": 69648.0,
+                    "pe_ratio": 22.21,
+                    "revenue_cr": 980136.0
+                },
+                "forecast_table": [
+                    {
+                        "ebit_cr": 134000.0,
+                        "fcf_cr": 42000.0,
+                        "nopat_cr": 100500.0,
+                        "revenue_cr": 1068998.24,
+                        "year": 1
+                    },
+                    {
+                        "ebit_cr": 145651.0,
+                        "fcf_cr": 46000.0,
+                        "nopat_cr": 109238.0,
+                        "revenue_cr": 1165208.08,
+                        "year": 2
+                    }
+                ],
+                "risks_and_opportunities": {
+                    "downside_risks": [
+                        "Volatility in oil prices",
+                        "Regulatory changes impacting operations"
+                    ],
+                    "upside_opportunities": [
+                        "Expansion in digital services",
+                        "Strategic partnerships and acquisitions"
+                    ]
+                }
+            }
+        },
+        "meta": {
+            "query": "Give me a full detailed analysis of RELIANCE. Run all your agents",
+            "timestamp": "2025-12-07T08:07:35.215365+00:00",
+            "type": "stock_analysis_report"
+        },
+        "montecarlo_output": {
+            "results": {
+                "error": "Missing dependency: Incorrect `api_key` or `access_token`."
+            }
+        },
+        "news_output": {
+            "news_output": [
+                {
+                    "date": "Thu, 04 Dec 2025 16:35:43 GMT",
+                    "source": "Social News XYZ",
+                    "summary": "Home  General  Business  SP raises Reliance Industries rating to A-on improving cash flow stability Posted By: Gopi December 4, 2025 New Delhi, Dec 4 SocialNews.XYZ SP Global Ratings on Thursday raise...",
+                    "title": "S&P raises Reliance Industries\u2019 rating to \u2018A-\u2018on improving cash flow stability - Social News XYZ"
+                },
+                {
+                    "date": "Thu, 04 Dec 2025 14:35:33 GMT",
+                    "source": "MarketScreener",
+                    "summary": "Access Denied You dont have permission to access  on this server. Reference 18.e9d6d717.1764872947.a30aa844...",
+                    "title": "Reliance Industries says Supreme Court dismisses Reliance appeal against 3 million rupees penalty - MarketScreener"
+                },
+                {
+                    "date": "Fri, 05 Dec 2025 02:07:00 GMT",
+                    "source": "ANI News",
+                    "summary": "Reliance Industries rating raised to A- from BBB by SP Global, Outlook stable on improving cash flow ANI  Updated: Dec 05, 2025 07:37 IST ANI News Join our Whatsapp channel New Delhi India, December 5...",
+                    "title": "Reliance Industries' rating raised to 'A-' from 'BBB+' by S&P Global, Outlook stable on improving cash flow - ANI News"
+                }
+            ],
+            "overall_sentiment": "bullish",
+            "timestamp": "2025-12-07T08:07:31.637410"
+        },
+        "portfolio_context": {
+            "current_position": "N/A",
+            "is_holding": false,
+            "suggested_action": "BUY"
+        },
+        "summary": "Reliance Industries is experiencing a bullish sentiment driven by a recent upgrade in its credit rating to 'A-' by S&P Global, reflecting improved cash flow stability. The company's strategic investments in digital services and clean energy, alongside a new digital mall initiative, are expected to enhance revenue growth and job creation. However, potential risks include volatility in oil prices and ongoing legal challenges. Overall, the positive outlook and strong financial fundamentals suggest a 'BUY' recommendation for investors looking to capitalize on growth opportunities.",
+        "technical_output": {
+            "json_data": {},
+            "reason": "Incorrect `api_key` or `access_token`.",
+            "signal": "HOLD",
+            "status": "error",
+            "strength": 0.0,
+            "ticker": "RELIANCE",
+            "timestamp": "2025-12-07T08:07:31.086797"
+        },
+        "tickers": [
+            "RELIANCE"
+        ],
+        "twitter_output": {
+            "sentiment_score": 0.7,
+            "summary": "The sentiment around $RELIANCE is predominantly bullish, driven by positive developments such as the opening of a new digital mall that promises job creation and enhanced services for local consumers. Additionally, a significant MoU for clean energy with the Tamil Nadu government is expected to generate jobs and boost the company's profile. However, there are some bearish narratives related to legal issues concerning Reliance Power, including allegations of fraud. Overall, the positive news outweighs the negative, leading to a bullish sentiment.",
+            "timestamp": "2025-12-07T08:07:34.965439"
+        }
+    },
+    "success": true,
+    "ticker": "RELIANCE"
+}

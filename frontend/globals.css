@@ -1,0 +1,176 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Updated color palette to match financial dashboard design */
+  --background: #0b1623;
+  --foreground: #e1e7ef;
+  --card: #161e27;
+  --card-foreground: #e1e7ef;
+  --popover: #161e27;
+  --popover-foreground: #e1e7ef;
+  --primary: #00c7a5;
+  --primary-foreground: #0b1623;
+  --secondary: #145b5b;
+  --secondary-foreground: #e1e7ef;
+  --muted: #2a3643;
+  --muted-foreground: #8a99ab;
+  --accent: #00c7a5;
+  --accent-foreground: #0b1623;
+  --destructive: #e00618;
+  --destructive-foreground: #e1e7ef;
+  --border: #2a3643;
+  --input: #2a3643;
+  --ring: #00c7a5;
+  --chart-1: #00c7a5;
+  --chart-2: #00bfff;
+  --chart-3: #008080;
+  --chart-4: #e24c4c;
+  --chart-5: #00ffff;
+  --radius: 0.5rem;
+  --sidebar: #161e27;
+  --sidebar-foreground: #e1e7ef;
+  --sidebar-primary: #00c7a5;
+  --sidebar-primary-foreground: #0b1623;
+  --sidebar-accent: #145b5b;
+  --sidebar-accent-foreground: #e1e7ef;
+  --sidebar-border: #2a3643;
+  --sidebar-ring: #00c7a5;
+}
+
+.dark {
+  --background: #0b1623;
+  --foreground: #e1e7ef;
+  --card: #161e27;
+  --card-foreground: #e1e7ef;
+  --popover: #161e27;
+  --popover-foreground: #e1e7ef;
+  --primary: #00c7a5;
+  --primary-foreground: #0b1623;
+  --secondary: #145b5b;
+  --secondary-foreground: #e1e7ef;
+  --muted: #2a3643;
+  --muted-foreground: #8a99ab;
+  --accent: #00c7a5;
+  --accent-foreground: #0b1623;
+  --destructive: #e00618;
+  --destructive-foreground: #e1e7ef;
+  --border: #2a3643;
+  --input: #2a3643;
+  --ring: #00c7a5;
+  --chart-1: #00c7a5;
+  --chart-2: #00bfff;
+  --chart-3: #008080;
+  --chart-4: #e24c4c;
+  --chart-5: #00ffff;
+  --sidebar: #161e27;
+  --sidebar-foreground: #e1e7ef;
+  --sidebar-primary: #00c7a5;
+  --sidebar-primary-foreground: #0b1623;
+  --sidebar-accent: #145b5b;
+  --sidebar-accent-foreground: #e1e7ef;
+  --sidebar-border: #2a3643;
+  --sidebar-ring: #00c7a5;
+}
+
+@theme inline {
+  --font-sans: "Geist", "Geist Fallback";
+  --font-mono: "Geist Mono", "Geist Mono Fallback";
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "tnum";
+  }
+}
+
+/* Added react-grid-layout custom styles */
+.react-grid-layout {
+  position: relative;
+  transition: height 200ms ease;
+}
+
+.react-grid-item {
+  transition: all 200ms ease;
+  transition-property: left, top, width, height;
+}
+
+.react-grid-item.cssTransforms {
+  transition-property: transform, width, height;
+}
+
+.react-grid-item.resizing {
+  transition: none;
+  z-index: 100;
+}
+
+.react-grid-item.react-draggable-dragging {
+  transition: none;
+  z-index: 100;
+}
+
+.react-grid-item.dropping {
+  visibility: hidden;
+}
+
+.react-grid-item.react-grid-placeholder {
+  background: #00c7a5;
+  opacity: 0.2;
+  transition-duration: 100ms;
+  z-index: 2;
+  border-radius: 0.5rem;
+}
+
+.react-resizable-handle {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+}
+
+.react-resizable-handle-se {
+  bottom: 0;
+  right: 0;
+  cursor: se-resize;
+}

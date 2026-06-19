@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-12-07T01:47:51.582249",
+  "isin": "IN0020230101",
+  "cache_type": "bond_details",
+  "data": {
+    "isin": "IN0020230101",
+    "symbol": "737GS2028",
+    "name": "GOVERNMENT OF INDIA 33536 GOI 23OT28",
+    "face_value": 100.0,
+    "coupon_rate": 7.37,
+    "coupon_frequency": 2,
+    "maturity_date": "2028-10-23",
+    "years_to_maturity": 2.87,
+    "last_traded_price": 104.0,
+    "theoretical_price": 104.91,
+    "current_price": 104.0,
+    "ytm": 5.919,
+    "valuation_date": "2025-12-04",
+    "macaulay_duration": 2.637,
+    "modified_duration": 2.49,
+    "convexity": 8.906
+  }
+}

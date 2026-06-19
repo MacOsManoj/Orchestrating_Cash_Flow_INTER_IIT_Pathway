@@ -1,0 +1,2 @@
+[console_scripts]
+agent-bond = main_v2:main

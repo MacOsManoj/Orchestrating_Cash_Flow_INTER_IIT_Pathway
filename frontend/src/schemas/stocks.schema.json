@@ -1,0 +1,191 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "stocks.schema.json",
+  "title": "Stock Asset Schema",
+  "description": "JSON Schema for stock trading and analysis data validation",
+  "type": "object",
+  "definitions": {
+    "StockIdentifier": {
+      "type": "object",
+      "properties": {
+        "symbol": { "type": "string" },
+        "name": { "type": "string" },
+        "exchange": { "type": "string" },
+        "currency": { "type": "string" }
+      },
+      "required": ["symbol", "name", "exchange", "currency"]
+    },
+    "StockPrice": {
+      "type": "object",
+      "properties": {
+        "current": { "type": "number" },
+        "change": { "type": "number" },
+        "changePercent": { "type": "number" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["current", "change", "changePercent", "timestamp"]
+    },
+    "StockPosition": {
+      "type": "object",
+      "properties": {
+        "currentValue": { "type": "number" },
+        "investedAmount": { "type": "number" },
+        "gainLoss": { "type": "number" },
+        "gainLossPercent": { "type": "number" },
+        "quantity": { "type": "number" },
+        "avgCostPerShare": { "type": "number" }
+      },
+      "required": ["currentValue", "investedAmount"]
+    },
+    "StockMarketData": {
+      "type": "object",
+      "properties": {
+        "highValue": { "type": "number" },
+        "lowValue": { "type": "number" },
+        "openPrice": { "type": "number" },
+        "closePrice": { "type": "number" },
+        "volume": { "type": "number" },
+        "marketCap": { "type": "string" },
+        "weekHigh52": { "type": "number" },
+        "weekLow52": { "type": "number" }
+      },
+      "required": ["highValue", "lowValue"]
+    },
+    "TechnicalIndicators": {
+      "type": "object",
+      "properties": {
+        "rsi": { "type": "string" },
+        "macd": { "type": "string" },
+        "movingAverage50": { "type": "string" },
+        "movingAverage200": { "type": "string" },
+        "support": { "type": "string" },
+        "resistance": { "type": "string" }
+      },
+      "required": ["rsi", "macd", "movingAverage50", "movingAverage200", "support", "resistance"]
+    },
+    "FundamentalMetrics": {
+      "type": "object",
+      "properties": {
+        "peRatio": { "type": "string" },
+        "pbRatio": { "type": "string" },
+        "debtToEquity": { "type": "string" },
+        "currentRatio": { "type": "string" },
+        "epsGrowth": { "type": "string" },
+        "revenueGrowth": { "type": "string" },
+        "roe": { "type": "string" },
+        "roce": { "type": "string" },
+        "dividendYield": { "type": "string" },
+        "freeCashFlow": { "type": "string" }
+      },
+      "required": ["peRatio", "pbRatio", "debtToEquity", "currentRatio", "epsGrowth", "revenueGrowth"]
+    },
+    "ChartDataPoint": {
+      "type": "object",
+      "properties": {
+        "time": { "oneOf": [{ "type": "number" }, { "type": "string" }] },
+        "open": { "type": "number" },
+        "high": { "type": "number" },
+        "low": { "type": "number" },
+        "close": { "type": "number" },
+        "volume": { "type": "number" }
+      },
+      "required": ["time", "open", "high", "low", "close", "volume"]
+    },
+    "MetricItem": {
+      "type": "object",
+      "properties": {
+        "label": { "type": "string" },
+        "value": { "oneOf": [{ "type": "string" }, { "type": "number" }] }
+      },
+      "required": ["label"]
+    },
+    "StockNews": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "source": { "type": "string" }
+      },
+      "required": ["id"]
+    },
+    "StockSummary": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "points": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "required": ["title", "points"]
+    },
+    "StockAnalysis": {
+      "type": "object",
+      "properties": {
+        "pros": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "cons": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "verdict": { "type": "string" }
+      },
+      "required": ["pros", "cons"]
+    },
+    "PeerComparison": {
+      "type": "object",
+      "properties": {
+        "symbol": { "type": "string" },
+        "name": { "type": "string" },
+        "peRatio": { "type": "number" },
+        "pbRatio": { "type": "number" },
+        "marketCap": { "type": "string" },
+        "performance": { "type": "number" }
+      },
+      "required": ["symbol", "name", "peRatio", "pbRatio", "marketCap", "performance"]
+    },
+    "TimePeriod": {
+      "type": "object",
+      "properties": {
+        "label": { "type": "string" },
+        "value": { "type": "string" }
+      },
+      "required": ["label", "value"]
+    }
+  },
+  "properties": {
+    "identifier": { "$ref": "#/definitions/StockIdentifier" },
+    "price": { "$ref": "#/definitions/StockPrice" },
+    "position": { "$ref": "#/definitions/StockPosition" },
+    "marketData": { "$ref": "#/definitions/StockMarketData" },
+    "technicalIndicators": { "$ref": "#/definitions/TechnicalIndicators" },
+    "fundamentalMetrics": { "$ref": "#/definitions/FundamentalMetrics" },
+    "metricsData": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/MetricItem" }
+    },
+    "chartData": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/ChartDataPoint" }
+    },
+    "news": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/StockNews" }
+    },
+    "summary": { "$ref": "#/definitions/StockSummary" },
+    "analysis": { "$ref": "#/definitions/StockAnalysis" },
+    "peers": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/PeerComparison" }
+    },
+    "timePeriods": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/TimePeriod" }
+    }
+  },
+  "required": ["identifier", "price"]
+}

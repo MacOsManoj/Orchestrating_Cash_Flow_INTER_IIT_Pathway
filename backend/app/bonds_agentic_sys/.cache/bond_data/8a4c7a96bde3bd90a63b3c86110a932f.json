@@ -1,0 +1,20 @@
+{
+  "timestamp": "2025-12-07T01:47:50.511775",
+  "isin": "IN0020250026",
+  "days_ahead": 21,
+  "cache_type": "bond_price",
+  "data": {
+    "bond_symbol": "633GS2035",
+    "bond_isin": "IN0020250026",
+    "bond_name": "GOVERNMENT OF INDIA 35943 GOI 05MY35",
+    "day": 21,
+    "date": "2026-01-01",
+    "estimated_price": 100.34,
+    "ytm_percent": 6.588,
+    "maturity_date": "2035-05-05",
+    "coupon_rate": 6.33,
+    "bond_type": "Government",
+    "rating": "AAA",
+    "risk_level": "Low"
+  }
+}

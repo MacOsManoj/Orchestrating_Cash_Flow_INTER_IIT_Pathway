@@ -1,0 +1,9 @@
+aiohttp
+aiokafka
+beautifulsoup4
+lxml
+pymongo
+redis
+requests
+pybloom-live
+python-dotenv

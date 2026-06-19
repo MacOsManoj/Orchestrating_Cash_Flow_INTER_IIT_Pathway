@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-12-07T01:47:54.068980",
+  "isin": "IN0020140011",
+  "cache_type": "bond_details",
+  "data": {
+    "isin": "IN0020140011",
+    "symbol": "86GS2028",
+    "name": "GOVERNMENT OF INDIA 16937 GOI 02JU28",
+    "face_value": 100.0,
+    "coupon_rate": 8.6,
+    "coupon_frequency": 2,
+    "maturity_date": "2028-06-02",
+    "years_to_maturity": 2.48,
+    "last_traded_price": 108.4,
+    "theoretical_price": 106.57,
+    "current_price": 108.4,
+    "ytm": 5.854,
+    "valuation_date": "2025-12-04",
+    "macaulay_duration": 2.303,
+    "modified_duration": 2.176,
+    "convexity": 7.015
+  }
+}

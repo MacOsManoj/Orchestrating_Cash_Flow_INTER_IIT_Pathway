@@ -1,0 +1,350 @@
+{
+  "tools": [
+    {
+      "name": "news_scraper",
+      "category": "external_data",
+      "description": "Scrapes recent financial news articles from various sources. Use this to understand current market sentiment, breaking news, and events that could impact bond prices.",
+      "data_source": "web_scraping",
+      "requires_agents": false,
+      "parameters": [
+        {
+          "name": "keywords",
+          "type": "array",
+          "required": false,
+          "default": ["bonds", "interest rates"],
+          "description": "Keywords to search for in news"
+        },
+        {
+          "name": "hours_back",
+          "type": "int",
+          "required": false,
+          "default": 24,
+          "description": "How many hours back to search"
+        }
+      ],
+      "trigger_phrases": [
+        "latest news",
+        "recent news",
+        "what's happening",
+        "market sentiment",
+        "breaking news"
+      ]
+    },
+    {
+      "name": "web_search",
+      "category": "external_data",
+      "description": "Performs a web search to find specific, factual information or current data that is not available in other tools. Good for very specific or obscure queries.",
+      "data_source": "web_search",
+      "requires_agents": false,
+      "parameters": [
+        {
+          "name": "query",
+          "type": "string",
+          "required": true,
+          "description": "Search query"
+        }
+      ],
+      "trigger_phrases": [
+        "search for",
+        "look up",
+        "find information about"
+      ]
+    },
+    {
+      "name": "crisil_scraper",
+      "category": "external_data",
+      "description": "Retrieves credit rating reports and rationale from CRISIL for a specific company or bond. Use this to assess credit quality, rating outlook, and default risk.",
+      "data_source": "crisil_api",
+      "requires_agents": false,
+      "parameters": [
+        {
+          "name": "bond_identifier",
+          "type": "string",
+          "required": true,
+          "description": "Bond symbol or ISIN"
+        }
+      ],
+      "trigger_phrases": [
+        "credit rating",
+        "CRISIL rating",
+        "rating outlook",
+        "default risk"
+      ]
+    },
+    {
+      "name": "portfolio_manager",
+      "category": "portfolio",
+      "description": "Accesses and manages the user's personal bond portfolio. Use this for any query that mentions 'my portfolio', 'my holdings', or requires knowledge of the user's current investments.",
+      "data_source": "user_portfolio",
+      "requires_agents": false,
+      "parameters": [],
+      "trigger_phrases": [
+        "my portfolio",
+        "my holdings",
+        "my bonds",
+        "my investments",
+        "portfolio analysis"
+      ]
+    },
+    {
+      "name": "bond_pricer",
+      "category": "bond_valuation",
+      "description": "Forecasts the future price of a specific bond based on various models. Use when the user asks for a price prediction.",
+      "data_source": "mcp_server",
+      "requires_agents": true,
+      "required_agents": ["ml_model"],
+      "parameters": [
+        {
+          "name": "bond_identifier",
+          "type": "string",
+          "required": true,
+          "description": "Bond symbol or ISIN"
+        },
+        {
+          "name": "days_ahead",
+          "type": "int",
+          "required": false,
+          "default": 7,
+          "description": "Number of days ahead to forecast"
+        }
+      ],
+      "trigger_phrases": [
+        "price forecast",
+        "future price",
+        "what will price be",
+        "predict price"
+      ]
+    },
+    {
+      "name": "yield_forecaster",
+      "category": "yield_analytics",
+      "description": "Forecasts the entire yield curve for different tenors. Use for queries about future interest rates, yield curve shape (steepening/flattening), and macro-level rate analysis.",
+      "data_source": "mcp_server",
+      "requires_agents": false,
+      "parameters": [
+        {
+          "name": "days_ahead",
+          "type": "int",
+          "required": false,
+          "default": 21,
+          "description": "Number of days ahead to forecast"
+        }
+      ],
+      "trigger_phrases": [
+        "yield curve",
+        "future yields",
+        "yield forecast",
+        "interest rate forecast",
+        "curve steepening",
+        "curve flattening"
+      ]
+    },
+    {
+      "name": "rag_retriever",
+      "category": "knowledge",
+      "description": "Retrieves relevant documents and chunks from a knowledge base (RAG system). Use this for queries about RBI policies, historical analysis, or information contained in indexed documents.",
+      "data_source": "rag_store",
+      "requires_agents": false,
+      "parameters": [
+        {
+          "name": "query",
+          "type": "string",
+          "required": true,
+          "description": "Query to search in knowledge base"
+        }
+      ],
+      "trigger_phrases": [
+        "RBI policy",
+        "historical analysis",
+        "what does the document say",
+        "past performance",
+        "policy document"
+      ]
+    }
+  ],
+  "agents": [
+    {
+      "name": "query_classifier",
+      "type": "classifier",
+      "description": "Analyzes and classifies the user's query to understand intent, entities, and filters. This is a good first step for most queries.",
+      "capabilities": [
+        "Intent classification",
+        "Entity extraction",
+        "Query parsing",
+        "Filter identification"
+      ]
+    },
+    {
+      "name": "ml_model",
+      "type": "prediction",
+      "description": "Uses machine learning models to predict bond returns and price movements. This is a core agent for generating quantitative insights.",
+      "capabilities": [
+        "Return prediction",
+        "Price forecasting",
+        "Risk modeling",
+        "Pattern recognition"
+      ],
+      "required_for": [
+        "Price predictions",
+        "Return forecasts",
+        "Investment recommendations"
+      ]
+    },
+    {
+      "name": "analyst",
+      "type": "analysis",
+      "description": "Performs deep financial analysis on bonds, calculating a wide range of metrics like fair value, duration, convexity, and risk scores. Essential for detailed bond evaluation.",
+      "capabilities": [
+        "Fair value calculation",
+        "Duration analysis",
+        "Convexity analysis",
+        "Risk assessment",
+        "Metric computation"
+      ],
+      "required_for": [
+        "Detailed bond analysis",
+        "Valuation",
+        "Risk metrics"
+      ]
+    },
+    {
+      "name": "scoring",
+      "type": "evaluation",
+      "description": "Scores and ranks bonds based on a weighted combination of valuation, return, quality, and liquidity. Use this to compare multiple bonds and find the best ones.",
+      "capabilities": [
+        "Multi-criteria scoring",
+        "Bond ranking",
+        "Comparative analysis",
+        "Quality assessment"
+      ],
+      "required_for": [
+        "Bond comparison",
+        "Ranking bonds",
+        "Finding best bonds"
+      ]
+    },
+    {
+      "name": "advisory",
+      "type": "recommendation",
+      "description": "Synthesizes all analysis to generate concrete, actionable trade recommendations (Buy, Sell, Hold) and a summary. This is the final step for generating user-facing advice.",
+      "capabilities": [
+        "Trade recommendations",
+        "Buy/Sell/Hold advice",
+        "Investment strategy",
+        "Action synthesis"
+      ],
+      "required_for": [
+        "Investment decisions",
+        "Trade recommendations",
+        "Final advice"
+      ]
+    },
+    {
+      "name": "explainability",
+      "type": "explanation",
+      "description": "Provides detailed explanations for recommendations, often using SHAP values or other model interpretation techniques. ONLY use this agent if the user explicitly asks for a reason or explanation (e.g., 'why?', 'explain').",
+      "capabilities": [
+        "SHAP analysis",
+        "Feature importance",
+        "Decision explanation",
+        "Model interpretation"
+      ],
+      "trigger_phrases": [
+        "why",
+        "explain",
+        "reason",
+        "how did you decide"
+      ]
+    }
+  ],
+  "planning_rules": [
+    {
+      "rule": "efficiency",
+      "description": "Only select components absolutely necessary to answer the query",
+      "examples": [
+        {
+          "query": "What is the price of bond X?",
+          "tools": ["bond_pricer"],
+          "agents": ["ml_model"]
+        }
+      ]
+    },
+    {
+      "rule": "no_agents_for_lookups",
+      "description": "If query is just asking for information (not recommendations), use ONLY tools, NO agents unless specifically needed",
+      "examples": [
+        {
+          "query": "What's the latest bond news?",
+          "tools": ["news_scraper"],
+          "agents": []
+        },
+        {
+          "query": "Search for RBI policy",
+          "tools": ["rag_retriever"],
+          "agents": []
+        }
+      ]
+    },
+    {
+      "rule": "agents_for_recommendations",
+      "description": "Only add analysis agents (ml_model, analyst, scoring, advisory) when user explicitly asks for recommendations or advice",
+      "examples": [
+        {
+          "query": "Recommend bonds for me",
+          "tools": ["bond_pricer", "yield_forecaster"],
+          "agents": ["query_classifier", "ml_model", "analyst", "scoring", "advisory"]
+        },
+        {
+          "query": "Should I buy bond X?",
+          "tools": ["bond_pricer", "crisil_scraper"],
+          "agents": ["query_classifier", "ml_model", "analyst", "scoring", "advisory"]
+        }
+      ]
+    },
+    {
+      "rule": "explainability_on_demand",
+      "description": "Only use explainability agent if user explicitly asks 'why', 'explain', 'reason'"
+    },
+    {
+      "rule": "portfolio_context",
+      "description": "Use portfolio_manager only if query mentions 'my portfolio', 'my bonds', 'my holdings'"
+    },
+    {
+      "rule": "rag_for_knowledge",
+      "description": "Use RAG retriever for queries about documents, historical analysis, RBI policies"
+    }
+  ],
+  "query_patterns": {
+    "information_only": {
+      "patterns": [
+        "what is",
+        "show me",
+        "latest",
+        "current",
+        "search for"
+      ],
+      "agents_needed": false
+    },
+    "recommendations": {
+      "patterns": [
+        "recommend",
+        "suggest",
+        "should I buy",
+        "what to invest",
+        "best bonds"
+      ],
+      "agents_needed": true,
+      "required_agents": ["query_classifier", "ml_model", "analyst", "scoring", "advisory"]
+    },
+    "explanation": {
+      "patterns": [
+        "why",
+        "explain",
+        "reason",
+        "how did"
+      ],
+      "agents_needed": true,
+      "required_agents": ["explainability"]
+    }
+  }
+}

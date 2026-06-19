@@ -1,0 +1,268 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "bonds.schema.json",
+  "title": "Bond Asset Schema",
+  "description": "JSON Schema for fixed income securities and bond analysis data validation",
+  "type": "object",
+  "definitions": {
+    "BondIdentifier": {
+      "type": "object",
+      "properties": {
+        "cusip": { "type": "string" },
+        "isin": { "type": "string" },
+        "name": { "type": "string" },
+        "issuer": { "type": "string" },
+        "currency": { "type": "string" },
+        "type": {
+          "type": "string",
+          "enum": ["Government", "Corporate", "Municipal", "High Yield", "Other"]
+        },
+        "figi": { "type": "string" },
+        "dayCountConvention": { "type": "string" }
+      },
+      "required": ["cusip", "isin", "name", "issuer", "currency", "type"]
+    },
+    "BondPricing": {
+      "type": "object",
+      "properties": {
+        "cleanPrice": { "type": "number" },
+        "dirtyPrice": { "type": "number" },
+        "lastPrice": { "type": "number" },
+        "yield": { "type": "number" },
+        "yieldToMaturity": { "type": "number" },
+        "yieldToCall": { "type": "number" },
+        "accrualInterest": { "type": "number" },
+        "priceChange": { "type": "number" },
+        "priceChangePercent": { "type": "number" }
+      },
+      "required": ["cleanPrice", "dirtyPrice", "lastPrice", "yield", "yieldToMaturity", "accrualInterest"]
+    },
+    "BondPosition": {
+      "type": "object",
+      "properties": {
+        "currentValue": { "type": "number" },
+        "investedAmount": { "type": "number" },
+        "gainLoss": { "type": "number" },
+        "gainLossPercent": { "type": "number" },
+        "quantity": { "type": "number" },
+        "faceValue": { "type": "number" },
+        "minIncrement": { "type": "number" }
+      },
+      "required": ["currentValue", "investedAmount", "quantity", "faceValue"]
+    },
+    "BondTerms": {
+      "type": "object",
+      "properties": {
+        "issueDate": { "type": "string", "format": "date" },
+        "maturityDate": { "type": "string", "format": "date" },
+        "couponRate": { "type": "number" },
+        "couponFrequency": {
+          "type": "string",
+          "enum": ["Annual", "Semi-annual", "Quarterly", "Monthly"]
+        },
+        "daysToMaturity": { "type": "integer" },
+        "nextCouponDate": { "type": "string", "format": "date" },
+        "callDate": { "type": "string", "format": "date" },
+        "putDate": { "type": "string", "format": "date" },
+        "settlement": { "type": "string" }
+      },
+      "required": ["issueDate", "maturityDate", "couponRate", "couponFrequency"]
+    },
+    "BondRiskMetrics": {
+      "type": "object",
+      "properties": {
+        "duration": { "type": "number" },
+        "modifiedDuration": { "type": "number" },
+        "convexity": { "type": "number" },
+        "dv01": { "type": "number" },
+        "spread": { "type": "number" },
+        "oas": { "type": "number" },
+        "zSpread": { "type": "number" },
+        "creditRating": { "type": "string" },
+        "creditRatingTrend": {
+          "type": "string",
+          "enum": ["Stable", "Positive", "Negative"]
+        }
+      },
+      "required": ["duration", "modifiedDuration", "convexity", "dv01", "creditRating"]
+    },
+    "BondMetricItem": {
+      "type": "object",
+      "properties": {
+        "label": { "type": "string" },
+        "value": { "type": "string" },
+        "trend": {
+          "type": "string",
+          "enum": ["up", "down", "neutral"]
+        },
+        "change": { "type": "string" }
+      },
+      "required": ["label", "value", "trend"]
+    },
+    "CouponPayment": {
+      "type": "object",
+      "properties": {
+        "date": { "type": "string", "format": "date" },
+        "type": {
+          "type": "string",
+          "enum": ["Coupon", "Coupon+Principal", "Principal", "Coupon+Princ."]
+        },
+        "coupon": { "type": "string" },
+        "couponRate": { "type": "number" },
+        "cashFlow": { "type": "string" },
+        "principal": { "type": "string" },
+        "total": { "type": "string" },
+        "totalPayment": { "type": "number" },
+        "status": {
+          "type": "string",
+          "enum": ["Past", "Upcoming"]
+        }
+      },
+      "required": ["date", "type", "status"]
+    },
+    "BondMarketData": {
+      "type": "object",
+      "properties": {
+        "currentPrice": { "type": "number" },
+        "priceChange": { "type": "number" },
+        "priceChangePercent": { "type": "number" },
+        "bid": { "type": "number" },
+        "ask": { "type": "number" },
+        "bidAskSpread": { "type": "number" },
+        "volume": { "type": "string" },
+        "openInterest": { "type": "string" },
+        "amountOutstanding": { "type": "string" },
+        "issueSize": { "type": "string" },
+        "lastTradeTime": { "type": "string" }
+      },
+      "required": ["currentPrice"]
+    },
+    "PriceChartData": {
+      "type": "object",
+      "properties": {
+        "date": { "type": "string" },
+        "price": { "type": "number" }
+      },
+      "required": ["date", "price"]
+    },
+    "YieldCurveComparison": {
+      "type": "object",
+      "properties": {
+        "term": { "type": "string" },
+        "bond": { "type": "number" },
+        "benchmark": { "type": "number" }
+      },
+      "required": ["term", "bond", "benchmark"]
+    },
+    "StressScenario": {
+      "type": "object",
+      "properties": {
+        "label": { "type": "string" },
+        "spread": { "type": "string" },
+        "color": { "type": "string" },
+        "bpsShift": { "type": "number" }
+      },
+      "required": ["label", "spread", "color"]
+    },
+    "ComparativeBond": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "cusip": { "type": "string" },
+        "yield": { "type": "string" },
+        "yieldChange": { "type": "string" },
+        "yieldTrend": {
+          "type": "string",
+          "enum": ["up", "down", "stable"]
+        },
+        "price": { "type": "string" },
+        "priceChange": { "type": "string" },
+        "priceTrend": {
+          "type": "string",
+          "enum": ["up", "down", "stable"]
+        },
+        "rating": { "type": "string" }
+      },
+      "required": ["name", "cusip", "yield", "price", "rating"]
+    },
+    "MarketUpdate": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" }
+      },
+      "required": ["title", "description"]
+    },
+    "PortfolioImpact": {
+      "type": "object",
+      "properties": {
+        "allocation": { "type": "number" },
+        "portfolioYieldChange": { "type": "number" }
+      },
+      "required": ["allocation", "portfolioYieldChange"]
+    }
+  },
+  "properties": {
+    "identifier": { "$ref": "#/definitions/BondIdentifier" },
+    "pricing": { "$ref": "#/definitions/BondPricing" },
+    "position": { "$ref": "#/definitions/BondPosition" },
+    "terms": { "$ref": "#/definitions/BondTerms" },
+    "riskMetrics": { "$ref": "#/definitions/BondRiskMetrics" },
+    "metrics": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/BondMetricItem" }
+    },
+    "marketData": { "$ref": "#/definitions/BondMarketData" },
+    "couponSchedule": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/CouponPayment" }
+    },
+    "priceChart": {
+      "type": "object",
+      "properties": {
+        "timeRanges": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "defaultRange": { "type": "string" },
+        "dataByPeriod": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": { "$ref": "#/definitions/PriceChartData" }
+          }
+        }
+      },
+      "required": ["timeRanges", "defaultRange"]
+    },
+    "yieldCurve": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/YieldCurveComparison" }
+        },
+        "curveType": {
+          "type": "string",
+          "enum": ["Forward", "Custom"]
+        }
+      },
+      "required": ["data", "curveType"]
+    },
+    "stressScenarios": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/definitions/StressScenario" }
+    },
+    "comparativeBonds": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/ComparativeBond" }
+    },
+    "marketUpdates": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/MarketUpdate" }
+    },
+    "portfolioImpact": { "$ref": "#/definitions/PortfolioImpact" },
+    "summary": { "type": "string" }
+  },
+  "required": ["identifier", "pricing", "terms"]
+}

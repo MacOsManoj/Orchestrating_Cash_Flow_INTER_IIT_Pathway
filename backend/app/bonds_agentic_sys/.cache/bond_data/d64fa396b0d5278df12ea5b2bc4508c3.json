@@ -1,0 +1,128 @@
+{
+  "timestamp": "2025-12-07T05:34:29.318022",
+  "isin": "746MH33",
+  "days_ahead": 0,
+  "cache_type": "bond_price",
+  "data": {
+    "bond_symbol": "746MH33",
+    "bond_isin": "IN2220230113",
+    "bond_name": "STATE DEVELOPMENT LOAN 33398 MH 13SP33",
+    "coupon_rate": 7.46,
+    "maturity_date": "2033-09-13",
+    "bond_type": "State Government",
+    "rating": "AAA",
+    "risk_level": "Low",
+    "last_traded_price": 99.0,
+    "starting_price": 108.49,
+    "ending_price": 108.25,
+    "price_change": -0.24,
+    "pct_change": -0.22,
+    "forecasts": [
+      {
+        "date": "2025-12-04",
+        "price": 108.49,
+        "ytm_percent": 6.516
+      },
+      {
+        "date": "2025-12-05",
+        "price": 108.46,
+        "ytm_percent": 6.527
+      },
+      {
+        "date": "2025-12-08",
+        "price": 108.48,
+        "ytm_percent": 6.535
+      },
+      {
+        "date": "2025-12-09",
+        "price": 108.47,
+        "ytm_percent": 6.543
+      },
+      {
+        "date": "2025-12-10",
+        "price": 108.45,
+        "ytm_percent": 6.552
+      },
+      {
+        "date": "2025-12-11",
+        "price": 108.43,
+        "ytm_percent": 6.56
+      },
+      {
+        "date": "2025-12-12",
+        "price": 108.41,
+        "ytm_percent": 6.567
+      },
+      {
+        "date": "2025-12-15",
+        "price": 108.43,
+        "ytm_percent": 6.575
+      },
+      {
+        "date": "2025-12-16",
+        "price": 108.41,
+        "ytm_percent": 6.583
+      },
+      {
+        "date": "2025-12-17",
+        "price": 108.4,
+        "ytm_percent": 6.59
+      },
+      {
+        "date": "2025-12-18",
+        "price": 108.38,
+        "ytm_percent": 6.597
+      },
+      {
+        "date": "2025-12-19",
+        "price": 108.36,
+        "ytm_percent": 6.604
+      },
+      {
+        "date": "2025-12-22",
+        "price": 108.37,
+        "ytm_percent": 6.611
+      },
+      {
+        "date": "2025-12-23",
+        "price": 108.35,
+        "ytm_percent": 6.618
+      },
+      {
+        "date": "2025-12-24",
+        "price": 108.33,
+        "ytm_percent": 6.625
+      },
+      {
+        "date": "2025-12-25",
+        "price": 108.31,
+        "ytm_percent": 6.631
+      },
+      {
+        "date": "2025-12-26",
+        "price": 108.29,
+        "ytm_percent": 6.638
+      },
+      {
+        "date": "2025-12-29",
+        "price": 108.31,
+        "ytm_percent": 6.644
+      },
+      {
+        "date": "2025-12-30",
+        "price": 108.29,
+        "ytm_percent": 6.651
+      },
+      {
+        "date": "2025-12-31",
+        "price": 108.27,
+        "ytm_percent": 6.657
+      },
+      {
+        "date": "2026-01-01",
+        "price": 108.25,
+        "ytm_percent": 6.663
+      }
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "timestamp": "2025-12-07T01:47:53.469805",
+  "isin": "IN0020210244",
+  "days_ahead": 21,
+  "cache_type": "bond_price",
+  "data": {
+    "bond_symbol": "654GS2032",
+    "bond_isin": "IN0020210244",
+    "bond_name": "GOVERNMENT OF INDIA 31280 GOI 17JN32",
+    "day": 21,
+    "date": "2026-01-01",
+    "estimated_price": 104.17,
+    "ytm_percent": 6.472,
+    "maturity_date": "2032-01-17",
+    "coupon_rate": 6.54,
+    "bond_type": "Government",
+    "rating": "AAA",
+    "risk_level": "Low"
+  }
+}

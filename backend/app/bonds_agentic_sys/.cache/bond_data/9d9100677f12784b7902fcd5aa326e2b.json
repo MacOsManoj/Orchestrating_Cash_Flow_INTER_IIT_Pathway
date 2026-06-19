@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-12-07T03:02:16.333671",
+  "isin": "IN0020150051",
+  "cache_type": "bond_details",
+  "data": {
+    "isin": "IN0020150051",
+    "symbol": "773GS2034",
+    "name": "GOVERNMENT OF INDIA 17916 GOI 19DC34",
+    "face_value": 100.0,
+    "coupon_rate": 7.73,
+    "coupon_frequency": 2,
+    "maturity_date": "2034-12-19",
+    "years_to_maturity": 9.03,
+    "last_traded_price": null,
+    "theoretical_price": 112.91,
+    "current_price": 112.91,
+    "ytm": 6.53,
+    "valuation_date": "2025-12-04",
+    "macaulay_duration": 6.566,
+    "modified_duration": 6.163,
+    "convexity": 52.449
+  }
+}

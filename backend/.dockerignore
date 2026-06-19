@@ -1,0 +1,71 @@
+# Virtual environments
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.cursor/
+
+# Git
+.git/
+.gitignore
+
+# Build artifacts
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Logs and caches
+*.log
+.cache/
+*.cache
+logs/
+
+# Local development
+.env.local
+.env.development
+*.local
+
+# Test files
+tests/
+test_*.py
+pytest_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Documentation
+*.md
+!README.md
+docs/
+
+# Nested virtual environments
+app/bonds_agentic_sys/.venv/
+app/bonds_agentic_sys/agent_bond.egg-info/
+app/bonds_agentic_sys/__pycache__/
+
+# Large lock files (will be regenerated)
+uv.lock
+app/bonds_agentic_sys/uv.lock
+
+# Data files that shouldn't be in container
+*.csv
+!app/bonds_agentic_sys/data/*.csv
+!app/bonds/api_functions/*.csv
+
+# Temporary files
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+

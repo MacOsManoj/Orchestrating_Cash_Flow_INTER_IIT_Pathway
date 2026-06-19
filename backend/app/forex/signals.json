@@ -1,0 +1,18 @@
+{
+  "EURUSD": {
+    "model": "usd_model",
+    "position": 1,
+    "direction": "long",
+    "predicted_return": 0.0018458139896392822,
+    "signal_strength": 0.18458139896392822,
+    "timestamp": "2025-12-02 00:00:00"
+  },
+  "GBPUSD": {
+    "model": "usd_model",
+    "position": 1,
+    "direction": "long",
+    "predicted_return": 0.00023254292085766792,
+    "signal_strength": 0.023254292085766792,
+    "timestamp": "2025-12-02 00:00:00"
+  }
+}

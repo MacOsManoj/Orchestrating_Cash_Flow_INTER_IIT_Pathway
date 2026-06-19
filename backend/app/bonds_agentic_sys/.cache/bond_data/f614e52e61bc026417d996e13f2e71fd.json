@@ -1,0 +1,20 @@
+{
+  "timestamp": "2025-12-07T03:02:17.255627",
+  "isin": "IN0020180454",
+  "days_ahead": 21,
+  "cache_type": "bond_price",
+  "data": {
+    "bond_symbol": "726GS2029",
+    "bond_isin": "IN0020180454",
+    "bond_name": "GOVERNMENT OF INDIA 21176 GOI 14JN29",
+    "day": 21,
+    "date": "2026-01-01",
+    "estimated_price": 107.3,
+    "ytm_percent": 5.928,
+    "maturity_date": "2029-01-14",
+    "coupon_rate": 7.26,
+    "bond_type": "Government",
+    "rating": "AAA",
+    "risk_level": "Low"
+  }
+}

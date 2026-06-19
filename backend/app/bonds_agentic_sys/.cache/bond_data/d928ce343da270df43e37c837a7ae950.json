@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-12-07T01:47:53.727683",
+  "isin": "IN1020240066",
+  "cache_type": "bond_details",
+  "data": {
+    "isin": "IN1020240066",
+    "symbol": "75AP32",
+    "name": "STATE DEVELOPMENT LOAN 34245 AP 24AP32",
+    "face_value": 100.0,
+    "coupon_rate": 7.5,
+    "coupon_frequency": 2,
+    "maturity_date": "2032-04-24",
+    "years_to_maturity": 6.38,
+    "last_traded_price": null,
+    "theoretical_price": 107.35,
+    "current_price": 107.35,
+    "ytm": 6.414,
+    "valuation_date": "2025-12-04",
+    "macaulay_duration": 5.192,
+    "modified_duration": 4.879,
+    "convexity": 31.66
+  }
+}

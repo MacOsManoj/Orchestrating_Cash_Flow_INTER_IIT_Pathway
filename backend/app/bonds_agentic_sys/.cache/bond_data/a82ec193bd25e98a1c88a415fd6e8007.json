@@ -1,0 +1,20 @@
+{
+  "timestamp": "2025-12-07T03:02:14.622375",
+  "isin": "IN0020160100",
+  "days_ahead": 21,
+  "cache_type": "bond_price",
+  "data": {
+    "bond_symbol": "657GS2033",
+    "bond_isin": "IN0020160100",
+    "bond_name": "GOVERNMENT OF INDIA 18957 GOI 05DC33",
+    "day": 21,
+    "date": "2026-01-01",
+    "estimated_price": 101.12,
+    "ytm_percent": 6.66,
+    "maturity_date": "2033-12-05",
+    "coupon_rate": 6.57,
+    "bond_type": "Government",
+    "rating": "AAA",
+    "risk_level": "Low"
+  }
+}

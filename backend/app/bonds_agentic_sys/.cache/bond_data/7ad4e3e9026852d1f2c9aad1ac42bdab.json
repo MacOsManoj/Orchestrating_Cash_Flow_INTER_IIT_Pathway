@@ -1,0 +1,20 @@
+{
+  "timestamp": "2025-12-07T03:02:17.741434",
+  "isin": "IN1520220089",
+  "days_ahead": 21,
+  "cache_type": "bond_price",
+  "data": {
+    "bond_symbol": "773GJ32",
+    "bond_isin": "IN1520220089",
+    "bond_name": "STATE DEVELOPMENT LOAN 31889 GUJ 10AG32",
+    "day": 21,
+    "date": "2026-01-01",
+    "estimated_price": 110.19,
+    "ytm_percent": 6.585,
+    "maturity_date": "2032-08-10",
+    "coupon_rate": 7.73,
+    "bond_type": "State Government",
+    "rating": "AAA",
+    "risk_level": "Low"
+  }
+}

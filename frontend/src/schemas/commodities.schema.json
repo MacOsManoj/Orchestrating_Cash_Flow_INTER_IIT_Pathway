@@ -1,0 +1,213 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "commodities.schema.json",
+  "title": "Commodities Asset Schema",
+  "description": "JSON Schema for commodity trading (gold, oil, metals, etc.) data validation",
+  "type": "object",
+  "definitions": {
+    "CommodityIdentifier": {
+      "type": "object",
+      "properties": {
+        "symbol": { "type": "string" },
+        "name": { "type": "string" },
+        "type": {
+          "type": "string",
+          "enum": ["Precious Metals", "Energy", "Agriculture", "Base Metals", "Other"]
+        },
+        "unit": { "type": "string" },
+        "currency": { "type": "string" }
+      },
+      "required": ["symbol", "name"]
+    },
+    "MarketPrice": {
+      "type": "object",
+      "properties": {
+        "currentPrice": { "type": "number" },
+        "change24h": {
+          "type": "object",
+          "properties": {
+            "value": { "type": "number" },
+            "percentage": { "type": "number" },
+            "isPositive": { "type": "boolean" }
+          },
+          "required": ["value", "percentage", "isPositive"]
+        },
+        "openPrice": { "type": "number" },
+        "highPrice": { "type": "number" },
+        "lowPrice": { "type": "number" },
+        "lastUpdate": { "type": "string" }
+      },
+      "required": ["currentPrice", "change24h"]
+    },
+    "Holdings": {
+      "type": "object",
+      "properties": {
+        "totalValue": { "type": "number" },
+        "percentOfCommodity": { "type": "number" },
+        "avgBuyPrice": { "type": "number" },
+        "unrealizedGainLoss": {
+          "type": "object",
+          "properties": {
+            "value": { "type": "number" },
+            "isPositive": { "type": "boolean" }
+          },
+          "required": ["value", "isPositive"]
+        },
+        "portfolioExposure": { "type": "number" },
+        "quantity": { "type": "number" },
+        "unit": { "type": "string" }
+      },
+      "required": ["totalValue", "percentOfCommodity", "avgBuyPrice", "unrealizedGainLoss", "portfolioExposure"]
+    },
+    "KeyStats": {
+      "type": "object",
+      "properties": {
+        "open": { "type": "number" },
+        "high": { "type": "number" },
+        "low": { "type": "number" },
+        "volume": { "type": "string" },
+        "marketCap": { "type": "string" },
+        "weekHigh52": { "type": "number" },
+        "weekLow52": { "type": "number" },
+        "ytdReturn": { "type": "number" },
+        "bid": { "type": "number" },
+        "ask": { "type": "number" }
+      },
+      "required": ["open", "high", "low", "volume", "weekHigh52"]
+    },
+    "ChartDataPoint": {
+      "type": "object",
+      "properties": {
+        "time": { "type": "string" },
+        "price": { "type": "number" },
+        "isPositive": { "type": "boolean" },
+        "change": { "type": "number" }
+      },
+      "required": ["time", "price", "isPositive"]
+    },
+    "ChartData": {
+      "type": "object",
+      "properties": {
+        "timeRanges": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "defaultRange": { "type": "string" },
+        "dataPoints": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ChartDataPoint" }
+        },
+        "dataByRange": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": { "$ref": "#/definitions/ChartDataPoint" }
+          }
+        },
+        "trend": {
+          "type": "string",
+          "enum": ["Up", "Down", "Stable"]
+        }
+      },
+      "required": ["timeRanges", "defaultRange", "dataPoints", "dataByRange"]
+    },
+    "NewsItem": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "source": { "type": "string" },
+        "time": { "type": "string" },
+        "icon": { "type": "string" },
+        "sentiment": {
+          "type": "string",
+          "enum": ["Positive", "Negative", "Neutral"]
+        }
+      },
+      "required": ["id", "title", "source", "time", "icon"]
+    },
+    "RiskWarning": {
+      "type": "object",
+      "properties": {
+        "type": { "type": "string" },
+        "message": { "type": "string" },
+        "severity": {
+          "type": "string",
+          "enum": ["Low", "Medium", "High"]
+        }
+      },
+      "required": ["type", "message"]
+    },
+    "RiskTracking": {
+      "type": "object",
+      "properties": {
+        "historicalVolatility": { "type": "number" },
+        "valueAtRisk": { "type": "number" },
+        "beta": { "type": "number" },
+        "liquidityScore": { "type": "number" },
+        "warnings": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/RiskWarning" }
+        },
+        "volatilityTrend": {
+          "type": "string",
+          "enum": ["Increasing", "Decreasing", "Stable"]
+        }
+      },
+      "required": ["historicalVolatility", "valueAtRisk", "beta", "liquidityScore", "warnings"]
+    },
+    "CommodityCorrelation": {
+      "type": "object",
+      "properties": {
+        "symbol": { "type": "string" },
+        "name": { "type": "string" },
+        "correlation": { "type": "number" },
+        "trend": {
+          "type": "string",
+          "enum": ["Positive", "Negative", "Neutral"]
+        }
+      },
+      "required": ["symbol", "name", "correlation", "trend"]
+    },
+    "SeasonalTrend": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "month": { "type": "string" },
+              "avgPrice": { "type": "number" }
+            },
+            "required": ["month", "avgPrice"]
+          }
+        },
+        "description": { "type": "string" }
+      },
+      "required": ["data", "description"]
+    }
+  },
+  "properties": {
+    "symbol": { "type": "string" },
+    "name": { "type": "string" },
+    "identifier": { "$ref": "#/definitions/CommodityIdentifier" },
+    "marketPrice": { "$ref": "#/definitions/MarketPrice" },
+    "price": { "$ref": "#/definitions/MarketPrice" },
+    "holdings": { "$ref": "#/definitions/Holdings" },
+    "keyStats": { "$ref": "#/definitions/KeyStats" },
+    "chartData": { "$ref": "#/definitions/ChartData" },
+    "news": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/NewsItem" }
+    },
+    "marketContext": { "type": "string" },
+    "riskTracking": { "$ref": "#/definitions/RiskTracking" },
+    "seasonalTrends": { "$ref": "#/definitions/SeasonalTrend" },
+    "correlations": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/CommodityCorrelation" }
+    }
+  },
+  "required": ["symbol", "name", "marketPrice", "holdings", "keyStats", "chartData", "news", "marketContext", "riskTracking"]
+}

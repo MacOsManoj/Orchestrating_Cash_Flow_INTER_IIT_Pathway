@@ -1,0 +1,10 @@
+pathway[xpack-llm,xpack-llm-docs]>=0.27.0
+pdf2image>=1.17.0
+river>=0.23.0
+unstructured>=0.18.21
+
+[dev]
+pytest>=7.4.0
+black>=23.0.0
+flake8>=6.0.0
+mypy>=1.5.0

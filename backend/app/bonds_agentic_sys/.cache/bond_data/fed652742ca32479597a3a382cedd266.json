@@ -1,0 +1,20 @@
+{
+  "timestamp": "2025-12-07T01:47:51.805879",
+  "isin": "IN0020230101",
+  "days_ahead": 21,
+  "cache_type": "bond_price",
+  "data": {
+    "bond_symbol": "737GS2028",
+    "bond_isin": "IN0020230101",
+    "bond_name": "GOVERNMENT OF INDIA 33536 GOI 23OT28",
+    "day": 21,
+    "date": "2026-01-01",
+    "estimated_price": 105.43,
+    "ytm_percent": 5.892,
+    "maturity_date": "2028-10-23",
+    "coupon_rate": 7.37,
+    "bond_type": "Government",
+    "rating": "AAA",
+    "risk_level": "Low"
+  }
+}

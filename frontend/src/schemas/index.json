@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "index.schema.json",
+  "title": "Asset Schemas Index",
+  "description": "Central index for all asset class JSON schemas",
+  "type": "object",
+  "definitions": {
+    "AssetClass": {
+      "type": "string",
+      "enum": ["stocks", "bonds", "options", "commodities", "fx"]
+    },
+    "SchemaReference": {
+      "type": "object",
+      "properties": {
+        "schemaFile": { "type": "string" },
+        "description": { "type": "string" }
+      },
+      "required": ["schemaFile", "description"]
+    }
+  },
+  "properties": {
+    "schemas": {
+      "type": "object",
+      "properties": {
+        "stocks": {
+          "$ref": "#/definitions/SchemaReference",
+          "default": {
+            "schemaFile": "stocks.schema.json",
+            "description": "Schema for stock trading and analysis data"
+          }
+        },
+        "bonds": {
+          "$ref": "#/definitions/SchemaReference",
+          "default": {
+            "schemaFile": "bonds.schema.json",
+            "description": "Schema for fixed income securities and bond analysis"
+          }
+        },
+        "options": {
+          "$ref": "#/definitions/SchemaReference",
+          "default": {
+            "schemaFile": "options.schema.json",
+            "description": "Schema for options trading and derivatives analysis"
+          }
+        },
+        "commodities": {
+          "$ref": "#/definitions/SchemaReference",
+          "default": {
+            "schemaFile": "commodities.schema.json",
+            "description": "Schema for commodity trading (gold, oil, metals, etc.)"
+          }
+        },
+        "fx": {
+          "$ref": "#/definitions/SchemaReference",
+          "default": {
+            "schemaFile": "fx.schema.json",
+            "description": "Schema for currency trading and forex analysis"
+          }
+        }
+      }
+    },
+    "version": {
+      "type": "string",
+      "default": "1.0.0"
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date"
+    }
+  },
+  "additionalProperties": false
+}

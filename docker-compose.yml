@@ -1,0 +1,470 @@
+version: "3.8"
+
+# ===========================
+# Complete Financial Intelligence Platform
+# WITH REMOTE MONGODB (Atlas/GCP)
+# ===========================
+# Services:
+# - Infrastructure: Zookeeper, Kafka, Redis
+# - News Pipeline: Scraper → Pathway → LLM Worker
+# - Bonds: Pipeline (4 services) → MCP Server (port 8123)
+# - Forex: MCP Server (port 8127)
+# - FastAPI Backend: REST API for frontend/clients (port 8000)
+# - MongoDB: EXTERNAL (configured via MONGODB_URI env var)
+# ===========================
+
+services:
+  # ==========================================
+  # INFRASTRUCTURE LAYER
+  # ==========================================
+
+  # Zookeeper - Required for Kafka
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.5.0
+    container_name: zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "2181:2181"
+    volumes:
+      - zookeeper_data:/var/lib/zookeeper/data
+      - zookeeper_logs:/var/lib/zookeeper/log
+    networks:
+      - intelligence_network
+    restart: unless-stopped
+
+  # Kafka Broker - Message streaming
+  kafka:
+    image: confluentinc/cp-kafka:7.5.0
+    container_name: kafka
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+      - "9093:9093"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:9093
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+      KAFKA_LOG_RETENTION_HOURS: 168
+      KAFKA_LOG_SEGMENT_BYTES: 1073741824
+    volumes:
+      - kafka_data:/var/lib/kafka/data
+    networks:
+      - intelligence_network
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "kafka-broker-api-versions",
+          "--bootstrap-server",
+          "localhost:9092",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # Redis - Caching, deduplication, Bloom filters
+  redis:
+    image: redis:7.2-alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes --maxmemory 4gb --maxmemory-policy allkeys-lru
+    volumes:
+      - redis_data:/data
+    networks:
+      - intelligence_network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+  # ==========================================
+  # MONGODB - EXTERNAL (REMOTE)
+  # ==========================================
+  # Local MongoDB container is DISABLED
+  # Configure MONGODB_URI in backend/.env to point to:
+  # - MongoDB Atlas: mongodb+srv://...
+  # - GCP Marketplace MongoDB
+  # - Another VM with MongoDB
+  # ==========================================
+
+  # ==========================================
+  # KAFKA INITIALIZATION
+  # ==========================================
+
+  kafka-init:
+    image: confluentinc/cp-kafka:7.5.0
+    container_name: kafka-init
+    depends_on:
+      kafka:
+        condition: service_healthy
+    networks:
+      - intelligence_network
+    command: >
+      sh -c "
+        echo 'Waiting for Kafka to be ready...';
+        sleep 15;
+        echo 'Creating Kafka topics...';
+        kafka-topics --create --if-not-exists --bootstrap-server kafka:9092 --topic raw-news-feed --partitions 6 --replication-factor 1;
+        kafka-topics --create --if-not-exists --bootstrap-server kafka:9092 --topic enriched-news --partitions 1 --replication-factor 1;
+        kafka-topics --create --if-not-exists --bootstrap-server kafka:9092 --topic summarized-news --partitions 1 --replication-factor 1;
+        kafka-topics --create --if-not-exists --bootstrap-server kafka:9092 --topic deduplicated-news --partitions 1 --replication-factor 1;
+        echo 'Kafka topics created successfully!';
+        kafka-topics --list --bootstrap-server kafka:9092;
+      "
+
+  # ==========================================
+  # NEWS INTELLIGENCE PIPELINE
+  # ==========================================
+
+  # Layer 1: News Scraper - Metadata extraction
+  news-scraper:
+    build:
+      context: ./backend/services/news-scraper
+      dockerfile: Dockerfile
+    container_name: news-scraper
+    depends_on:
+      kafka:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      kafka-init:
+        condition: service_completed_successfully
+    env_file:
+      - ./backend/.env
+    environment:
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - SCRAPE_INTERVAL=300
+      - TEST_COMPANY=all
+      - MAX_CONCURRENT_STRATEGIES=10
+    volumes:
+      - ./backend/services/news-scraper:/app
+    networks:
+      - intelligence_network
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 512M
+
+  # Layer 2: Enrichment Pipeline - Content fetching, sentiment, dedup
+  enrichment-pipeline:
+    build:
+      context: ./backend/services/enrichment-pipeline
+      dockerfile: Dockerfile
+    container_name: enrichment-pipeline
+    depends_on:
+      kafka:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      kafka-init:
+        condition: service_completed_successfully
+    env_file:
+      - ./backend/.env
+    environment:
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - MAX_CONCURRENT_FETCHES=20
+    volumes:
+      - ./backend/services/enrichment-pipeline:/app
+    ports:
+      - "8080:8080"
+    networks:
+      - intelligence_network
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 8G
+        reservations:
+          memory: 2G
+
+  # Layer 3: LLM Worker - Summarization & impact assessment
+  llm-worker:
+    build:
+      context: ./backend/services/llm-worker
+      dockerfile: Dockerfile
+    container_name: llm-worker
+    depends_on:
+      kafka:
+        condition: service_healthy
+      kafka-init:
+        condition: service_completed_successfully
+    env_file:
+      - ./backend/.env
+    environment:
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - RATE_LIMIT_RPM=2000
+      - MAX_CONCURRENT_REQUESTS=50
+    volumes:
+      - ./backend/services/llm-worker:/app
+    networks:
+      - intelligence_network
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+        reservations:
+          memory: 1G
+
+  # ==========================================
+  # API LAYER
+  # ==========================================
+
+  # ==========================================
+  # BONDS SERVICES
+  # ==========================================
+
+  # Step 1: Bond Pipeline (runs 4 background services)
+  bond-pipeline:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: bond-pipeline
+    env_file:
+      - ./backend/.env
+    environment:
+      - PYTHONPATH=/app:/app/app/bonds_agentic_sys:/app/app/forex
+      - STARTUP_DELAY=${BOND_STARTUP_DELAY:-30}
+      - PATH=/app/.venv/bin:$PATH
+    working_dir: /app/app/bonds_agentic_sys/pathway_producer_consumer
+    command: >
+      bash -c "
+        chmod +x run_bond_pipeline_linux.sh &&
+        ./run_bond_pipeline_linux.sh start &&
+        echo '✅ Bond pipeline services started' &&
+        tail -f /dev/null
+      "
+    volumes:
+      - bonds_cache:/app/app/bonds_agentic_sys/.cache
+      - bonds_forecasts:/app/app/bonds_agentic_sys/output_forecasts
+      - pipeline_logs:/app/app/bonds_agentic_sys/pathway_producer_consumer/logs
+      - pipeline_pids:/app/app/bonds_agentic_sys/pathway_producer_consumer/.pids
+    networks:
+      - intelligence_network
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "test -f /app/app/bonds_agentic_sys/pathway_producer_consumer/.pids/bond_server_manager.pid && kill -0 $$(cat /app/app/bonds_agentic_sys/pathway_producer_consumer/.pids/bond_server_manager.pid) 2>/dev/null || exit 1",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 90s
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+        reservations:
+          memory: 1G
+
+  # Step 2: Bond MCP Server
+  bond-mcp-server:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: bond-mcp-server
+    depends_on:
+      bond-pipeline:
+        condition: service_healthy
+    env_file:
+      - ./backend/.env
+    environment:
+      - PYTHONPATH=/app:/app/app/bonds_agentic_sys:/app/app/forex
+      - PATH=/app/.venv/bin:$PATH
+      - MCP_HOST=0.0.0.0
+      - MCP_PORT=8123
+    working_dir: /app/app/bonds_agentic_sys/tools
+    command: >
+      bash -c "
+        echo '⏳ Waiting for bond pipeline forecasts...' &&
+        timeout 300 bash -c 'until [ -f /app/app/bonds_agentic_sys/output_forecasts/final_forecasts.csv ]; do sleep 5; done' &&
+        echo '✅ Starting Bond MCP Server on port 8123...' &&
+        python bond_server.py
+      "
+    volumes:
+      - bonds_cache:/app/app/bonds_agentic_sys/.cache
+      - bonds_forecasts:/app/app/bonds_agentic_sys/output_forecasts
+    ports:
+      - "8123:8123"
+    networks:
+      - intelligence_network
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          'python -c ''import requests; requests.get("http://localhost:8123", timeout=5)'' || exit 1',
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 512M
+
+  # ==========================================
+  # FOREX SERVICES
+  # ==========================================
+
+  forex-mcp-server:
+    build:
+      context: ./backend/services/forex
+      dockerfile: Dockerfile
+    container_name: forex-mcp-server
+    env_file:
+      - ./backend/.env
+    environment:
+      - PATHWAY_LICENSE_KEY=${PATHWAY_LICENSE_KEY}
+      - NEWSDATA_API_KEY=${NEWSDATA_API_KEY:-}
+      - MCP_HOST=0.0.0.0
+      - MCP_PORT=8127
+    volumes:
+      - forex_data:/app/data
+      - ./backend/services/forex:/app
+    ports:
+      - "8127:8127"
+    networks:
+      - intelligence_network
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          'python -c ''import requests; requests.get("http://localhost:8127/mcp/", timeout=5)'' || exit 1',
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 512M
+
+  # ==========================================
+  # API LAYER
+  # ==========================================
+
+  # FastAPI Backend - REST API
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: api
+    depends_on:
+      bond-mcp-server:
+        condition: service_healthy
+      forex-mcp-server:
+        condition: service_healthy
+    env_file:
+      - ./backend/.env
+    environment:
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      - CORS_ORIGINS=http://localhost:5173,http://localhost:3000,http://localhost:80,http://localhost
+      - PYTHONPATH=/app:/app/app/bonds_agentic_sys:/app/app/forex
+      - PATH=/app/.venv/bin:$PATH
+      - BOND_MCP_URL=http://bond-mcp-server:8123
+      - FOREX_MCP_URL=http://forex-mcp-server:8127
+    volumes:
+      - ./backend:/app
+      - bonds_cache:/app/app/bonds_agentic_sys/.cache
+      - bonds_forecasts:/app/app/bonds_agentic_sys/output_forecasts
+    ports:
+      - "8000:8000"
+    networks:
+      - intelligence_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 512M
+
+  # ==========================================
+  # FRONTEND
+  # ==========================================
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    depends_on:
+      api:
+        condition: service_healthy
+    ports:
+      - "80:80"
+      - "3000:80"
+    networks:
+      - intelligence_network
+    restart: unless-stopped
+    healthcheck:
+      test:
+        ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 128M
+
+# ==========================================
+# NETWORKS
+# ==========================================
+
+networks:
+  intelligence_network:
+    driver: bridge
+
+# ==========================================
+# VOLUMES (Persistent Storage)
+# ==========================================
+
+volumes:
+  zookeeper_data:
+  zookeeper_logs:
+  kafka_data:
+  redis_data:
+  bonds_cache:
+  bonds_forecasts:
+  pipeline_logs:
+  pipeline_pids:
+  forex_data:

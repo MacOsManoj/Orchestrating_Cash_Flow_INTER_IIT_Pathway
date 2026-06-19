@@ -1,0 +1,399 @@
+{
+  "EURINR": {
+    "total_trades": 47,
+    "winning_trades": 28,
+    "losing_trades": 19,
+    "win_rate": 0.5229,
+    "total_profit_pct": 17.5774,
+    "max_drawdown_pct": -3.3906,
+    "sharpe_ratio": 3.3705,
+    "information_ratio": 0.89,
+    "turnover_ratio": 2.34,
+    "avg_win_pct": 0.58,
+    "avg_loss_pct": -0.41,
+    "profit_factor": 1.68,
+    "avg_holding_period_days": 4.2,
+    "largest_win_pct": 2.15,
+    "largest_loss_pct": -1.87,
+    "consecutive_wins_max": 6,
+    "consecutive_losses_max": 3,
+    "recent_trades": [
+      {
+        "date": "2024-11-25",
+        "side": "long",
+        "entry": 89.45,
+        "exit": 89.72,
+        "pnl_pct": 0.3
+      },
+      {
+        "date": "2024-11-22",
+        "side": "short",
+        "entry": 89.68,
+        "exit": 89.45,
+        "pnl_pct": 0.26
+      },
+      {
+        "date": "2024-11-18",
+        "side": "long",
+        "entry": 89.12,
+        "exit": 89.68,
+        "pnl_pct": 0.63
+      }
+    ],
+    "sortino_ratio": 8.9276,
+    "calmar_ratio": 13.3917
+  },
+  "GBPINR": {
+    "total_trades": 53,
+    "winning_trades": 29,
+    "losing_trades": 24,
+    "win_rate": 0.4818,
+    "total_profit_pct": 2.903,
+    "max_drawdown_pct": -11.0771,
+    "sharpe_ratio": 0.687,
+    "information_ratio": 0.72,
+    "turnover_ratio": 2.89,
+    "avg_win_pct": 0.52,
+    "avg_loss_pct": -0.39,
+    "profit_factor": 1.45,
+    "avg_holding_period_days": 3.8,
+    "largest_win_pct": 1.98,
+    "largest_loss_pct": -2.15,
+    "consecutive_wins_max": 5,
+    "consecutive_losses_max": 4,
+    "recent_trades": [
+      {
+        "date": "2025-12-04",
+        "side": "long",
+        "entry": 118.39425,
+        "exit": 118.39425,
+        "pnl_pct": -0.0
+      },
+      {
+        "date": "2024-11-26",
+        "side": "short",
+        "entry": 106.82,
+        "exit": 106.45,
+        "pnl_pct": 0.35
+      },
+      {
+        "date": "2024-11-21",
+        "side": "long",
+        "entry": 106.12,
+        "exit": 106.82,
+        "pnl_pct": 0.66
+      },
+      {
+        "date": "2024-11-15",
+        "side": "short",
+        "entry": 106.95,
+        "exit": 106.12,
+        "pnl_pct": 0.78
+      }
+    ],
+    "sortino_ratio": 1.1642,
+    "calmar_ratio": 0.6117
+  },
+  "JPYINR": {
+    "total_trades": 42,
+    "winning_trades": 24,
+    "losing_trades": 18,
+    "win_rate": 0.5872,
+    "total_profit_pct": 31.5631,
+    "max_drawdown_pct": -4.8847,
+    "sharpe_ratio": 4.7031,
+    "information_ratio": 0.81,
+    "turnover_ratio": 1.92,
+    "avg_win_pct": 0.45,
+    "avg_loss_pct": -0.35,
+    "profit_factor": 1.54,
+    "avg_holding_period_days": 5.1,
+    "largest_win_pct": 1.65,
+    "largest_loss_pct": -1.42,
+    "consecutive_wins_max": 4,
+    "consecutive_losses_max": 3,
+    "recent_trades": [
+      {
+        "date": "2025-12-06",
+        "side": "short",
+        "entry": 0.57567,
+        "exit": 0.57567,
+        "pnl_pct": 0.0006
+      },
+      {
+        "date": "2025-12-06",
+        "side": "long",
+        "entry": 0.57567,
+        "exit": 0.57567,
+        "pnl_pct": -0.0006
+      },
+      {
+        "date": "2025-12-05",
+        "side": "short",
+        "entry": 0.57567,
+        "exit": 0.57567,
+        "pnl_pct": 0.0006
+      },
+      {
+        "date": "2025-12-05",
+        "side": "long",
+        "entry": 0.57567,
+        "exit": 0.57567,
+        "pnl_pct": -0.0006
+      },
+      {
+        "date": "2024-11-24",
+        "side": "long",
+        "entry": 0.5512,
+        "exit": 0.5545,
+        "pnl_pct": 0.6
+      },
+      {
+        "date": "2024-11-20",
+        "side": "short",
+        "entry": 0.5578,
+        "exit": 0.5512,
+        "pnl_pct": 1.18
+      },
+      {
+        "date": "2024-11-14",
+        "side": "long",
+        "entry": 0.5498,
+        "exit": 0.5578,
+        "pnl_pct": 1.45
+      }
+    ],
+    "sortino_ratio": 7.6387,
+    "calmar_ratio": 18.1284
+  },
+  "EURUSD": {
+    "total_trades": 93,
+    "winning_trades": 35,
+    "losing_trades": 58,
+    "win_rate": 0.3763440860215054,
+    "total_profit_pct": 4.457,
+    "max_drawdown_pct": -5.4923,
+    "sharpe_ratio": 1.279,
+    "information_ratio": 0.95,
+    "turnover_ratio": 3.12,
+    "avg_win_pct": 0.48,
+    "avg_loss_pct": -0.32,
+    "profit_factor": 1.72,
+    "avg_holding_period_days": 3.2,
+    "largest_win_pct": 1.89,
+    "largest_loss_pct": -1.56,
+    "consecutive_wins_max": 7,
+    "consecutive_losses_max": 3,
+    "recent_trades": [
+      {
+        "date": "2025-12-07",
+        "side": "long",
+        "entry": 1.1644,
+        "exit": 1.1644,
+        "pnl_pct": 0.0
+      },
+      {
+        "date": "2025-12-07",
+        "side": "short",
+        "entry": 1.1644,
+        "exit": 1.1644,
+        "pnl_pct": 0.0
+      },
+      {
+        "date": "2025-12-07",
+        "side": "long",
+        "entry": 1.1644,
+        "exit": 1.1644,
+        "pnl_pct": 0.0
+      },
+      {
+        "date": "2025-12-07",
+        "side": "long",
+        "entry": 1.1644,
+        "exit": 1.1644,
+        "pnl_pct": 0.0
+      },
+      {
+        "date": "2025-12-07",
+        "side": "short",
+        "entry": 1.1644,
+        "exit": 1.1644,
+        "pnl_pct": 0.0
+      },
+      {
+        "date": "2025-12-07",
+        "side": "long",
+        "entry": 1.1644,
+        "exit": 1.1644,
+        "pnl_pct": 0.0
+      },
+      {
+        "date": "2025-12-07",
+        "side": "long",
+        "entry": 1.1644,
+        "exit": 1.1644,
+        "pnl_pct": 0.0
+      },
+      {
+        "date": "2025-12-07",
+        "side": "short",
+        "entry": 1.1644,
+        "exit": 1.1644,
+        "pnl_pct": 0.0
+      },
+      {
+        "date": "2025-12-07",
+        "side": "long",
+        "entry": 1.1644,
+        "exit": 1.1644,
+        "pnl_pct": 0.0
+      },
+      {
+        "date": "2025-12-06",
+        "side": "long",
+        "entry": 1.16062,
+        "exit": 1.16062,
+        "pnl_pct": 0.0
+      }
+    ],
+    "sortino_ratio": 2.4507,
+    "calmar_ratio": 1.9128
+  },
+  "GBPUSD": {
+    "total_trades": 68,
+    "winning_trades": 31,
+    "losing_trades": 37,
+    "win_rate": 0.45588235294117646,
+    "total_profit_pct": 4.1102,
+    "max_drawdown_pct": -8.2329,
+    "sharpe_ratio": 1.0535,
+    "information_ratio": 0.78,
+    "turnover_ratio": 2.67,
+    "avg_win_pct": 0.51,
+    "avg_loss_pct": -0.38,
+    "profit_factor": 1.52,
+    "avg_holding_period_days": 3.6,
+    "largest_win_pct": 2.12,
+    "largest_loss_pct": -1.95,
+    "consecutive_wins_max": 5,
+    "consecutive_losses_max": 4,
+    "recent_trades": [
+      {
+        "date": "2025-12-07",
+        "side": "long",
+        "entry": 1.33289,
+        "exit": 1.33289,
+        "pnl_pct": 0.0
+      },
+      {
+        "date": "2025-12-06",
+        "side": "long",
+        "entry": 1.32084,
+        "exit": 1.32084,
+        "pnl_pct": 0.0
+      },
+      {
+        "date": "2025-12-06",
+        "side": "long",
+        "entry": 1.32084,
+        "exit": 1.32084,
+        "pnl_pct": 0.0
+      },
+      {
+        "date": "2025-12-06",
+        "side": "long",
+        "entry": 1.32084,
+        "exit": 1.32084,
+        "pnl_pct": 0.0
+      },
+      {
+        "date": "2025-12-06",
+        "side": "long",
+        "entry": 1.32084,
+        "exit": 1.32084,
+        "pnl_pct": 0.0
+      },
+      {
+        "date": "2025-12-06",
+        "side": "long",
+        "entry": 1.32084,
+        "exit": 1.32084,
+        "pnl_pct": 0.0
+      },
+      {
+        "date": "2025-12-06",
+        "side": "long",
+        "entry": 1.32084,
+        "exit": 1.32084,
+        "pnl_pct": 0.0
+      },
+      {
+        "date": "2025-12-06",
+        "side": "long",
+        "entry": 1.32084,
+        "exit": 1.32084,
+        "pnl_pct": 0.0
+      },
+      {
+        "date": "2025-12-06",
+        "side": "long",
+        "entry": 1.32084,
+        "exit": 1.32084,
+        "pnl_pct": 0.0
+      },
+      {
+        "date": "2025-12-06",
+        "side": "long",
+        "entry": 1.32084,
+        "exit": 1.32084,
+        "pnl_pct": 0.0
+      }
+    ],
+    "sortino_ratio": 1.5859,
+    "calmar_ratio": 1.1742
+  },
+  "USDJPY": {
+    "total_trades": 58,
+    "winning_trades": 33,
+    "losing_trades": 25,
+    "win_rate": 0.5321,
+    "total_profit_pct": 22.4397,
+    "max_drawdown_pct": -4.482,
+    "sharpe_ratio": 3.7269,
+    "information_ratio": 0.85,
+    "turnover_ratio": 2.98,
+    "avg_win_pct": 0.46,
+    "avg_loss_pct": -0.34,
+    "profit_factor": 1.58,
+    "avg_holding_period_days": 3.4,
+    "largest_win_pct": 1.78,
+    "largest_loss_pct": -1.65,
+    "consecutive_wins_max": 6,
+    "consecutive_losses_max": 3,
+    "recent_trades": [
+      {
+        "date": "2024-11-27",
+        "side": "long",
+        "entry": 153.45,
+        "exit": 154.12,
+        "pnl_pct": 0.44
+      },
+      {
+        "date": "2024-11-23",
+        "side": "short",
+        "entry": 154.28,
+        "exit": 153.45,
+        "pnl_pct": 0.54
+      },
+      {
+        "date": "2024-11-18",
+        "side": "long",
+        "entry": 153.12,
+        "exit": 154.28,
+        "pnl_pct": 0.76
+      }
+    ],
+    "sortino_ratio": 6.9341,
+    "calmar_ratio": 13.3171
+  }
+}

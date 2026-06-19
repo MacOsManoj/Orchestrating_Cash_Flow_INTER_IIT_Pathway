@@ -1,0 +1,128 @@
+{
+  "timestamp": "2025-12-07T05:34:23.016065",
+  "isin": "86GS2028",
+  "days_ahead": 0,
+  "cache_type": "bond_price",
+  "data": {
+    "bond_symbol": "86GS2028",
+    "bond_isin": "IN0020140011",
+    "bond_name": "GOVERNMENT OF INDIA 16937 GOI 02JU28",
+    "coupon_rate": 8.6,
+    "maturity_date": "2028-06-02",
+    "bond_type": "Government",
+    "rating": "AAA",
+    "risk_level": "Low",
+    "last_traded_price": 108.4,
+    "starting_price": 106.57,
+    "ending_price": 107.08,
+    "price_change": 0.51,
+    "pct_change": 0.48,
+    "forecasts": [
+      {
+        "date": "2025-12-04",
+        "price": 106.57,
+        "ytm_percent": 5.854
+      },
+      {
+        "date": "2025-12-05",
+        "price": 106.6,
+        "ytm_percent": 5.849
+      },
+      {
+        "date": "2025-12-08",
+        "price": 106.65,
+        "ytm_percent": 5.845
+      },
+      {
+        "date": "2025-12-09",
+        "price": 106.68,
+        "ytm_percent": 5.842
+      },
+      {
+        "date": "2025-12-10",
+        "price": 106.7,
+        "ytm_percent": 5.839
+      },
+      {
+        "date": "2025-12-11",
+        "price": 106.72,
+        "ytm_percent": 5.836
+      },
+      {
+        "date": "2025-12-12",
+        "price": 106.74,
+        "ytm_percent": 5.834
+      },
+      {
+        "date": "2025-12-15",
+        "price": 106.8,
+        "ytm_percent": 5.831
+      },
+      {
+        "date": "2025-12-16",
+        "price": 106.82,
+        "ytm_percent": 5.83
+      },
+      {
+        "date": "2025-12-17",
+        "price": 106.84,
+        "ytm_percent": 5.829
+      },
+      {
+        "date": "2025-12-18",
+        "price": 106.85,
+        "ytm_percent": 5.828
+      },
+      {
+        "date": "2025-12-19",
+        "price": 106.87,
+        "ytm_percent": 5.828
+      },
+      {
+        "date": "2025-12-22",
+        "price": 106.92,
+        "ytm_percent": 5.827
+      },
+      {
+        "date": "2025-12-23",
+        "price": 106.94,
+        "ytm_percent": 5.827
+      },
+      {
+        "date": "2025-12-24",
+        "price": 106.95,
+        "ytm_percent": 5.827
+      },
+      {
+        "date": "2025-12-25",
+        "price": 106.97,
+        "ytm_percent": 5.828
+      },
+      {
+        "date": "2025-12-26",
+        "price": 106.98,
+        "ytm_percent": 5.828
+      },
+      {
+        "date": "2025-12-29",
+        "price": 107.03,
+        "ytm_percent": 5.828
+      },
+      {
+        "date": "2025-12-30",
+        "price": 107.05,
+        "ytm_percent": 5.829
+      },
+      {
+        "date": "2025-12-31",
+        "price": 107.06,
+        "ytm_percent": 5.83
+      },
+      {
+        "date": "2026-01-01",
+        "price": 107.08,
+        "ytm_percent": 5.83
+      }
+    ]
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-12-07T01:47:52.009571",
+  "isin": "IN0020220037",
+  "cache_type": "bond_details",
+  "data": {
+    "isin": "IN0020220037",
+    "symbol": "738GS2027",
+    "name": "GOVERNMENT OF INDIA 31719 GOI 20JU27",
+    "face_value": 100.0,
+    "coupon_rate": 7.38,
+    "coupon_frequency": 2,
+    "maturity_date": "2027-06-20",
+    "years_to_maturity": 1.53,
+    "last_traded_price": 105.82,
+    "theoretical_price": 105.97,
+    "current_price": 105.82,
+    "ytm": 5.684,
+    "valuation_date": "2025-12-04",
+    "macaulay_duration": 1.439,
+    "modified_duration": 1.362,
+    "convexity": 3.241
+  }
+}

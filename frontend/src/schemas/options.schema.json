@@ -1,0 +1,197 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "options.schema.json",
+  "title": "Options Asset Schema",
+  "description": "JSON Schema for options trading and derivatives analysis data validation",
+  "type": "object",
+  "definitions": {
+    "StockInfo": {
+      "type": "object",
+      "properties": {
+        "ticker": { "type": "string" },
+        "companyName": { "type": "string" },
+        "spotPrice": { "type": "number" },
+        "impliedVolatility": { "type": "number" },
+        "volume": { "type": "string" },
+        "holdingsPercent": { "type": "number" },
+        "lastUpdated": { "type": "string" }
+      },
+      "required": ["ticker", "companyName", "spotPrice", "impliedVolatility", "volume", "holdingsPercent", "lastUpdated"]
+    },
+    "OptionContractIdentifier": {
+      "type": "object",
+      "properties": {
+        "ticker": { "type": "string" },
+        "companyName": { "type": "string" },
+        "contractType": {
+          "type": "string",
+          "enum": ["Call", "Put"]
+        },
+        "strikePrice": { "type": "number" },
+        "expirationDate": { "type": "string" },
+        "daysToExpiration": { "type": "integer" }
+      },
+      "required": ["ticker", "companyName", "contractType", "strikePrice", "expirationDate"]
+    },
+    "OptionPricing": {
+      "type": "object",
+      "properties": {
+        "spotPrice": { "type": "number" },
+        "optionPrice": { "type": "number" },
+        "bid": { "type": "number" },
+        "ask": { "type": "number" },
+        "bidAskSpread": { "type": "number" },
+        "lastTradePrice": { "type": "number" },
+        "impliedVolatility": { "type": "number" },
+        "theoreticalValue": { "type": "number" }
+      },
+      "required": ["spotPrice", "impliedVolatility"]
+    },
+    "GreeksData": {
+      "type": "object",
+      "properties": {
+        "delta": { "type": "number" },
+        "gamma": { "type": "number" },
+        "theta": { "type": "number" },
+        "vega": { "type": "number" },
+        "rho": { "type": "number" }
+      },
+      "required": ["delta", "gamma", "theta", "vega"]
+    },
+    "OptionChainRow": {
+      "type": "object",
+      "properties": {
+        "strike": { "type": "number" },
+        "ask": { "type": "number" },
+        "bid": { "type": "number" },
+        "volume": { "type": "string" },
+        "openInterest": { "type": "string" },
+        "iv": { "type": "string" },
+        "delta": { "type": "number" },
+        "gamma": { "type": "number" },
+        "theta": { "type": "number" },
+        "vega": { "type": "number" },
+        "isHighlighted": { "type": "boolean" }
+      },
+      "required": ["strike", "ask", "volume", "openInterest", "iv", "delta"]
+    },
+    "MarketSentiment": {
+      "type": "object",
+      "properties": {
+        "putCallRatio": { "type": "number" },
+        "volumeSpike": { "type": "string" },
+        "ivRank": { "type": "string" },
+        "ivPercentile": { "type": "number" },
+        "bullishPercent": { "type": "number" }
+      },
+      "required": ["putCallRatio", "volumeSpike", "ivRank"]
+    },
+    "NewsItem": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "source": { "type": "string" },
+        "timeAgo": { "type": "string" },
+        "iconType": {
+          "type": "string",
+          "enum": ["chart", "oil", "bank", "stock", "alert"]
+        }
+      },
+      "required": ["id", "title", "source", "timeAgo", "iconType"]
+    },
+    "PayoffPosition": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["Long Call", "Long Put", "Short Call", "Short Put", "Straddle", "Strangle"]
+        },
+        "strike": { "type": "number" },
+        "premium": { "type": "number" },
+        "quantity": { "type": "integer" },
+        "maxProfit": { "type": "string" },
+        "maxLoss": { "type": "string" },
+        "breakEven": { "type": "number" },
+        "breakEvenLower": { "type": "number" },
+        "breakEvenUpper": { "type": "number" }
+      },
+      "required": ["type", "strike", "premium", "maxProfit", "maxLoss", "breakEven"]
+    },
+    "OptionChain": {
+      "type": "object",
+      "properties": {
+        "calls": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/OptionChainRow" }
+        },
+        "puts": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/OptionChainRow" }
+        },
+        "mostActiveContracts": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/OptionChainRow" }
+        }
+      }
+    },
+    "OptionMetrics": {
+      "type": "object",
+      "properties": {
+        "spotPrice": { "type": "number" },
+        "impliedVolatility": { "type": "number" },
+        "volume": { "type": "string" },
+        "holdingsPercent": { "type": "number" },
+        "lastUpdated": { "type": "string" },
+        "openInterest": { "type": "string" },
+        "daysToExpiration": { "type": "integer" }
+      },
+      "required": ["spotPrice", "impliedVolatility", "volume", "holdingsPercent", "lastUpdated"]
+    },
+    "ImpliedVolatilityChart": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "time": { "type": "string" },
+              "iv": { "type": "number" }
+            },
+            "required": ["time", "iv"]
+          }
+        },
+        "trend": {
+          "type": "string",
+          "enum": ["Up", "Down", "Stable"]
+        }
+      },
+      "required": ["data", "trend"]
+    }
+  },
+  "properties": {
+    "stockInfo": { "$ref": "#/definitions/StockInfo" },
+    "contractIdentifier": { "$ref": "#/definitions/OptionContractIdentifier" },
+    "pricing": { "$ref": "#/definitions/OptionPricing" },
+    "metrics": { "$ref": "#/definitions/OptionMetrics" },
+    "greeks": { "$ref": "#/definitions/GreeksData" },
+    "optionChainData": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/OptionChainRow" }
+    },
+    "optionChain": { "$ref": "#/definitions/OptionChain" },
+    "marketSentiment": { "$ref": "#/definitions/MarketSentiment" },
+    "payoffPosition": { "$ref": "#/definitions/PayoffPosition" },
+    "payoffPositions": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/PayoffPosition" }
+    },
+    "newsItems": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/NewsItem" }
+    },
+    "impliedVolatilityChart": { "$ref": "#/definitions/ImpliedVolatilityChart" }
+  },
+  "required": ["stockInfo"]
+}
