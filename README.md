@@ -1,5 +1,4 @@
-# Financial Intelligence Platform - Team 46
-
+# Orchestrating Cash Flow                   
 ## 🎯 Features
 
 ### News Intelligence
@@ -74,11 +73,6 @@ The entire platform runs in Docker containers for easy deployment.
 
 ### 1. Clone Repository
 
-```bash
-git clone https://github.com/YOUR_USERNAME/upgraded-octo-spork.git
-cd upgraded-octo-spork
-```
-
 ### Prerequisites - Get Your API Keys
 
 Before setting up the environment, you'll need these free/paid API keys:
@@ -86,7 +80,7 @@ Before setting up the environment, you'll need these free/paid API keys:
 | Service                                                  | Free Tier             | Required? | Purpose                          |
 | -------------------------------------------------------- | --------------------- | --------- | -------------------------------- |
 | [Google Gemini](https://aistudio.google.com/app/apikeys) | ✅ Yes (free)         | ⭐ Yes    | Article summarization & analysis |
-| [OpenAI](https://platform.openai.com/api-keys)           | ❌ No ($5+ credit)    | ⭐ Yes    | GPT-4o for orchestration & bonds |
+| [OpenAI](https://platform.openai.com/api-keys)           | ❌ No                 | ⭐ Yes    | GPT-4o for orchestration & bonds |
 | [NewsData.io](https://newsdata.io)                       | ✅ Yes (free)         | ⭐ Yes    | News feed enrichment             |
 | [Groq](https://console.groq.com)                         | ✅ Yes (free)         | Optional  | Faster LLM inference             |
 | [SerpAPI](https://serpapi.com)                           | ✅ Yes (limited free) | Optional  | Web search for bonds             |
